@@ -1,0 +1,17 @@
+.card__container{
+    height: 20rem;
+    width: 15rem;
+    border-radius: 10px;
+    /* background-size: contain;
+    background-repeat: no-repeat; */
+    background:linear-gradient(to top , rgba(0, 0, 0, 0.918) 25%, rgba(0, 0, 0, 0) 90%), url(../Card/assets/spiderman.jpg);
+    /* background-image: url(../Card/assets/spiderman.jpg); */
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.card__title{
+    color: white;
+    text-transform: uppercase;
+}
