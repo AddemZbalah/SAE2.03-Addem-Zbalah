@@ -14,6 +14,7 @@
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
+      import { Card } from "./component/Card/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -30,6 +31,19 @@
         V.renderNavBar("C.handlerAbout()");
       };
 
+      C.getMovie = async function(){
+      let input = document.querySelector('#semaine');
+      let semaine = input.value;
+      let data = await DataMenu.request(semaine, jour);
+      if (data.length == 0){
+        data = [
+          {entree: 'Soon...', plat: 'Soon...', dessert: 'Soon...'}
+        ];
+      }
+      V.renderMenu(data);
+    }
+
+
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
 
@@ -43,6 +57,11 @@
       V.renderNavBar = function (hAbout) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
+      };
+
+      V.renderCard = function (cMovies) {
+        let cards = document.querySelector("#card__container");
+        cards.innerHTML = Card.format(cMovies);
       };
 
       C.start(); // Démarre l'application

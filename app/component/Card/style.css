@@ -1,17 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body{
+    font-family: 'Bebas Neue' ,sans-serif;
+}
+
+
+
 .card__container{
     height: 20rem;
     width: 15rem;
     border-radius: 10px;
     /* background-size: contain;
     background-repeat: no-repeat; */
-    background:linear-gradient(to top , rgba(0, 0, 0, 0.918) 25%, rgba(0, 0, 0, 0) 90%), url(../Card/assets/spiderman.jpg);
+    background:linear-gradient(to top , rgba(0, 0, 0, 0.918) 25%, rgba(0, 0, 0, 0) 90%), var(--bg-card);
     /* background-image: url(../Card/assets/spiderman.jpg); */
     background-size: contain;
     background-repeat: no-repeat;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 
 }
 
 .card__title{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
     text-transform: uppercase;
+    position: relative;
+    transform: translateY(7rem);
+    font-size: 2rem;
 }
