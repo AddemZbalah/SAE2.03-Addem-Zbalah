@@ -26,7 +26,7 @@ define("DBPWD", "zbalah3");
  * @param string $j Le jour pour lequel le menu est récupéré.
  * @return array Un tableau d'objets contenant l'entrée, le plat principal et le dessert pour le jour spécifié.
  */
-function getMovie($category, $title){
+function getMovie(){
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     // Requête SQL pour récupérer le menu avec des paramètres
@@ -34,8 +34,8 @@ function getMovie($category, $title){
     // Prépare la requête SQL
     $stmt = $cnx->prepare($sql);
     // Lie le paramètre à la valeur
-    $stmt->bindParam(':category', $category);
-    $stmt->bindParam(':title', $title);
+    // $stmt->bindParam(':category', $category);
+    // $stmt->bindParam(':title', $title);
     // Exécute la requête SQL
     $stmt->execute();
     // Récupère les résultats de la requête sous forme d'objets

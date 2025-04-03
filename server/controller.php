@@ -33,13 +33,12 @@ function readController(){
  
     // PREMIERE VERIFICATION : LES PARAMETRES EXISTENT ET SONT NON VIDES
     // Vérification du paramètre 'semaine' 
-    if ( isset($_REQUEST['category'])==false || empty($_REQUEST['title'])==false ){
-        $movie = getMovie($category, $title);
-        return $movie;
+        $movies = getMovie();
+        return $movies;
     }
     // Vérification du paramètre 'jour'
 
     // si on arrive ici c'est que les paramètres existent et sont valides, on peut interroger la BDD
     // Appel de la fonction getMenu déclarée dans model.php pour extraire de la BDD le menu du jour spécifié
-}
+
 

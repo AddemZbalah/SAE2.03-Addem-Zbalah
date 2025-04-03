@@ -12,9 +12,12 @@
 
     <section id="content"></section>
 
+    <section id="card" class="card"></section>
+
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
       import { Card } from "./component/Card/script.js";
+      import { DataMovie } from "./data/dataMovie.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -27,21 +30,21 @@
         );
       };
 
+
       C.start = function () {
         V.renderNavBar("C.handlerAbout()");
+        C.getMovie();
       };
 
       C.getMovie = async function(){
-      let input = document.querySelector('#semaine');
-      let semaine = input.value;
-      let data = await DataMenu.request(semaine, jour);
+      let data = await DataMovie.request();
       if (data.length == 0){
         data = [
-          {entree: 'Soon...', plat: 'Soon...', dessert: 'Soon...'}
+          {film: 'Coming Soon...', category: 'Coming Soon...', img: 'Coming Soon...'}
         ];
       }
-      V.renderMenu(data);
-    }
+      V.renderCard(data);
+    };
 
 
       // Vue (contient tout ce qui est relatif à l'affichage)
@@ -60,8 +63,8 @@
       };
 
       V.renderCard = function (cMovies) {
-        let cards = document.querySelector("#card__container");
-        cards.innerHTML = Card.format(cMovies);
+        let cards = document.querySelector("#card");
+        cards.innerHTML = Card.formatMany(cMovies);
       };
 
       C.start(); // Démarre l'application

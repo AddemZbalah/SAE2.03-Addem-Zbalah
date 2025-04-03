@@ -6,8 +6,8 @@ let Card = {};
 
 Card.format = function(card){
     let html= template;
-    html = html.replace('{{title}}', card.title);
-    html = html.replace('{{img}}', card.img);
+    html = html.replace('{{title}}', card.name);
+    html = html.replace('{{img}}', card.image);
     html = html.replace('{{link}}', card.trailer);
     return html;
 }
