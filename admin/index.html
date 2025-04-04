@@ -9,21 +9,6 @@
   <body>
     <section id="log"></section>
     
-    <form method="get" action="../server/script.php">
-
-      <p class="form__saisi">Veuillez ajouter un film</p>
-
-      <input required type="text" name="title" placeholder="Saisissez le nom du film">
-      <input required type="text" name="realisateur" placeholder="Saisissez le nom du réalisateur">
-      <input required type="number" name="year" placeholder="Saisissez la date de sortie" min="1900" max="2090">
-      <textarea required name="description" placeholder="Description du film"></textarea>
-      <input required type="text" name="category" placeholder="Saisissez la catégorie du film">
-      <input required type="text" name="image" placeholder="Veuillez saisir le fichier de l'image">
-      <input required type="number" name="age" placeholder="Saisissez votre âge">
-      <input required type="texte" name="trailer" placeholder="Saisissezle lien de la vidéo du trailer">
-
-
-    </form>
 
     <script type="module">
       import { Log } from "./component/Log/script.js";
