@@ -1,28 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../css/base.css" />
-    <title>Document</title>
-</head>
-<body>
+<form class="form__container">
 
-    <form class="form__container" method="get" action="../server/script.php">
+    <p class="form__saisi">Veuillez ajouter un film</p>
 
-        <p class="form__saisi">Veuillez ajouter un film</p>
-  
-        <input class="form__input" required type="text" name="title" placeholder="Saisissez le nom du film">
-        <input class="form__input" required type="text" name="realisateur" placeholder="Saisissez le nom du réalisateur">
-        <input class="form__input" required type="number" name="year" placeholder="Saisissez la date de sortie" min="1900" max="2090">
-        <textarea class="form__textarea" required name="description" placeholder="Description du film"></textarea>
-        <input class="form__input" required type="text" name="category" placeholder="Saisissez la catégorie du film">
-        <input class="form__input" required type="text" name="image" placeholder="Veuillez saisir le fichier de l'image">
-        <input class="form__input" required type="number" name="age" placeholder="Saisissez votre âge">
-        <input class="form__input" required type="texte" name="trailer" placeholder="Saisissez le lien de la vidéo du trailer">
-  
-  
-      </form>
-    
-</body>
-</html>
+    <input class="form__input" required type="text" name="name" placeholder="Saisissez le nom du film">
+    <input class="form__input" required type="text" name="director" placeholder="Saisissez le nom du réalisateur">
+    <input class="form__input" required type="number" name="year" placeholder="Saisissez la date de sortie" min="1900"
+        max="2090">
+    <input class="form__input" required type="number" name="length" placeholder="Saisissez la durée">
+    <textarea class="form__textarea" required name="description" placeholder="Description du film"></textarea>
+    <input class="form__input" required type="number" name="id_category" placeholder="Saisissez la catégorie du film">
+    <input class="form__input" required type="text" name="image" placeholder="Veuillez saisir le fichier de l'image">
+    <input class="form__input" required type="number" name="min_age" placeholder="Saisissez votre âge" min="10"
+    max="100">
+    <input class="form__input" required type="text" name="trailer"
+        placeholder="Saisissez le lien de la vidéo du trailer">
+
+    <input class="form__btn" onclick="{{handler}}" type="button" value="Ajouter un film" name="todo" />
+</form>
