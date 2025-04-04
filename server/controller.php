@@ -42,3 +42,26 @@ function readController(){
     // Appel de la fonction getMenu déclarée dans model.php pour extraire de la BDD le menu du jour spécifié
 
 
+function addMovieController(){
+ 
+        // PREMIERE VERIFICATION : LES PARAMETRES EXISTENT ET SONT NON VIDES
+        // Vérification du paramètre 'semaine' 
+        $name = $_REQUEST['name'];
+        $year = $_REQUEST['year'];
+        $length = $_REQUEST['length'];
+        $description = $_REQUEST['description'];
+        $director = $_REQUEST['director'];
+        $id_categorie = $_REQUEST['id_categorie'];
+        $image = $_REQUEST['image'];
+        $trailer = $_REQUEST['trailer'];
+        $min_age = $_REQUEST['min_age'];
+
+
+        $ok = addMovie($name, $year, $length, $description, $director, $id_categorie, $image, $trailer, $min_age);
+        if($ok!=0){
+            return "Le film $name a correctement été ajouté à la bes de donnée";
+        }
+        else{
+            return "Une erreur est survenue";
+        }
+    }
