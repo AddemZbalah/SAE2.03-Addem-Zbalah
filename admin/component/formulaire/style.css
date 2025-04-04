@@ -64,5 +64,5 @@
 .form__btn:hover{
     color: grey;
     background-color: white;
-    cursor:pointer
+    cursor:pointer;
 }
