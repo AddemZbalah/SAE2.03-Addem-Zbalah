@@ -18,6 +18,7 @@
       import { NavBar } from "./component/NavBar/script.js";
       import { Card } from "./component/Card/script.js";
       import { DataMovie } from "./data/dataMovie.js";
+      import { Card_desc } from "./component/Desc_card/script.js";
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -28,6 +29,17 @@
         alert(
           "Ceci est une base de projet pour la SAE2.03 édition 2025. Bonne chance !"
         );
+      };
+
+      C.handlerDetail = async function (id) {
+        let movie = await DataMovie.requestMovieDetail(id);
+        if (movie.length == 0){
+          movie = [
+            {name: 'Soon...', category: 'Soon...', img:'Soon...', director:'Soon'}
+          ]
+        }
+
+        V.renderMovieDetail(movie);
       };
 
 
@@ -57,9 +69,10 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout) {
+      V.renderNavBar = function (hAbout,hHome) {
         let header = document.querySelector("#header");
         header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format(hHome);
       };
 
       V.renderCard = function (cMovies) {

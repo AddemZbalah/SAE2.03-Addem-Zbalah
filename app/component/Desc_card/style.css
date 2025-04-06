@@ -1,7 +1,7 @@
 .desc-card{
     height: 100vh;
     width: 100%;
-    background:linear-gradient(to top right, rgba(0, 0, 0, 0.923) 50%, rgba(0, 0, 0, 0.666) 90%), var(--bg-card);
+    background:linear-gradient(to top right, rgba(0, 0, 0, 0.858) 50%, rgba(0, 0, 0, 0.77) 90%), var(--bg-card);
     /* background-image: url(../Card/assets/spiderman.jpg); */
     background-size: cover;
     
@@ -14,6 +14,7 @@
     position: relative;
     top: 20rem;
     left: 2rem;
+    font-family: var(--ff-sans);
     
 }
 
@@ -23,7 +24,8 @@
 }
 
 .desc-card__description{
-    padding-right: 70rem;
+    /* padding-right: 70rem; */
+    width: 20rem;
     color: white;
 }
 
