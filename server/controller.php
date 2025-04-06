@@ -57,11 +57,23 @@ function addMovieController(){
         $min_age = $_REQUEST['min_age'];
 
 
+    //     $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age);
+    //     if($ok!=0){
+    //         return "Le film $name a correctement été ajouté à la base de donnée";
+    //     }
+    //     else {
+    //         return "Une erreur est survenue";
+    //     }
+    // }
+
+    if ($name && $year && $length && $description && $director && $id_category && $image && $trailer && $min_age) {
         $ok = addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age);
-        if($ok!=0){
+        if ($ok != 0) {
             return "Le film $name a correctement été ajouté à la base de donnée";
-        }
-        else{
+        } else {
             return "Une erreur est survenue";
         }
+    } else {
+        return "Tous les paramètres sont requis.";
     }
+}
