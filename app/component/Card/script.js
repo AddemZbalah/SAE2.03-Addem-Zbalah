@@ -6,10 +6,9 @@ let Card = {};
 
 Card.format = function(card){
     let html= template;
+    html = html.replace('<div class="card', `<div class="card" onclick="C.handlerDetail(${card.id})"`);
     html = html.replace('{{title}}', card.name);
     html = html.replace('{{img}}', card.image);
-    html = html.replace('{{link}}', card.trailer);
-    html = html.replace('{{handler}}', `"C.handlerDetail(${card.id})"`);
     return html;
 }
 

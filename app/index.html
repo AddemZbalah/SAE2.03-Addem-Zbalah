@@ -32,14 +32,14 @@
       };
 
       C.handlerDetail = async function (id) {
-        let movie = await DataMovie.requestMovieDetail(id);
+        let movie = await DataMovie.requestMovieDetails(id);
         if (movie.length == 0){
           movie = [
-            {name: 'Soon...', category: 'Soon...', img:'Soon...', director:'Soon'}
+            {name: 'Soon...', category: 'Soon...', img:'Soon...', director:'Soon...', length: 'Soon...', description:'Soon...', id_category: 'Soon...', image:'Soon...', trailer:'Soon...', min_age:'Soon...'}
           ]
         }
 
-        V.renderMovieDetail(movie);
+        V.renderMovieDetails(movie);
       };
 
 
@@ -79,6 +79,14 @@
         let cards = document.querySelector("#card");
         cards.innerHTML = Card.formatMany(cMovies);
       };
+
+      V.renderMovieDetails = function (movie) {
+        let cards = document.querySelector("#card");
+        cards.innerHTML = Card_desc.format(movie);
+      };
+
+      
+
 
       C.start(); // Démarre l'application
     </script>

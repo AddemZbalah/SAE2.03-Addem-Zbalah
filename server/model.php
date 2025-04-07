@@ -68,3 +68,18 @@ function addMovie($name, $year, $length, $description, $director, $id_category, 
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }
+
+function getMovieDetail($id){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT Movie.id, Movie.name, Movie.director, Movie.year, Movie.length, Movie.description, Movie.image, Movie.trailer, Movie.min_age, Movie.id_category, Category.name 
+    AS category FROM Movie JOIN Category ON Movie.id_category = Category.id WHERE Movie.id = :id";
+    $stmt = $cnx->prepare($sql);
+
+    $stmt->bindParam(':id', $id);
+    $stmt->execute();
+
+    $movieDetail = $stmt->fetch(PDO::FETCH_OBJ);
+
+    return $movieDetail;
+
+}

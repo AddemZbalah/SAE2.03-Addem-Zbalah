@@ -77,3 +77,12 @@ function addMovieController(){
         return "Tous les paramètres sont requis.";
     }
 }
+
+function readMovieDetailsController(){
+ 
+    // PREMIERE VERIFICATION : LES PARAMETRES EXISTENT ET SONT NON VIDES
+    // Vérification du paramètre 'semaine' 
+        $id = $_REQUEST['id'];
+        $movie = getMovieDetail($id);
+        return $movie;
+    }
