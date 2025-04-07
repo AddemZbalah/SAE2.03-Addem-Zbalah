@@ -51,8 +51,24 @@ span{
 }
 
 .desc-card__iframe{
-    position: relative;
-    transform: translateX(80rem);
-    top: -30rem;
+    /* position: relative;
+    transform: translateX(80rem); */
+    /* top: -30rem; */
     border: none;
 }
+
+
+@media screen and (max-width: 600px) {
+    .desc-card__details-container {
+        width: 100%;
+        position: relative;
+        top: 10rem;
+        left: 2rem;
+        font-family: var(--ff-sans);
+    }
+
+    .desc-card__iframe{
+        width: 19rem;
+        height: 17rem;
+    }
+  }
