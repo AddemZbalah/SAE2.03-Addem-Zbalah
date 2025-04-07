@@ -10,7 +10,9 @@
   <body>
     <header id="header"></header>
 
-    <section id="content"></section>
+    <section id="content">
+      <div id="card__contain"></div>
+    </section>
 
     <section id="card" class="card"></section>
 
@@ -19,6 +21,8 @@
       import { Card } from "./component/Card/script.js";
       import { DataMovie } from "./data/dataMovie.js";
       import { Card_desc } from "./component/Desc_card/script.js";
+      import { MovieCategory } from "./component/MovieCategory/script.js";
+
 
       // Controleur
       // Rappel, écrire window.C plutôt que let C est nécessaire pour tester depuis la console du navigateur
@@ -58,6 +62,13 @@
       V.renderCard(data);
     };
 
+    C.getMovieCategories = async function(){
+      let categories = await DataMovie.requestCategory();
+      let html = await MovieCategory.format(categories);
+      V.renderMovieCategories(html);
+    };
+
+
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -85,9 +96,13 @@
         cards.innerHTML = Card_desc.format(movie);
       };
 
+      V.renderMovieCategories = function (html) {
+        let cards = document.querySelector("#card");
+        cards.innerHTML = html;
+      };
+
+
       
-
-
       C.start(); // Démarre l'application
     </script>
   </body>

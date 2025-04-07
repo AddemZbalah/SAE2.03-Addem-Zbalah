@@ -33,6 +33,27 @@ DataMovie.requestMovieDetails = async function(id){
 
 }
 
+
+DataMovie.requestMovieCategory = async function(category){
+    // fetch permet d'envoyer une requête HTTP à l'URL spécifiée. 
+    // L'URL est construite en concaténant HOST_URL à "/server/script.php?direction=" et la valeur de la variable dir. 
+    // L'URL finale dépend de la valeur de HOST_URL et de dir.
+        let answer = await fetch(HOST_URL + "/server/script.php?todo=readmoviescategory&category=" + category);
+        let data = await answer.json();
+        return data;
+
+}
+
+DataMovie.requestCategory = async function(){
+    // fetch permet d'envoyer une requête HTTP à l'URL spécifiée. 
+    // L'URL est construite en concaténant HOST_URL à "/server/script.php?direction=" et la valeur de la variable dir. 
+    // L'URL finale dépend de la valeur de HOST_URL et de dir.
+        let answer = await fetch(HOST_URL + "/server/script.php?todo=readcategories");
+        let data = await answer.json();
+        return data;
+
+}
+
 /* C'EST QUOI async/await ?
     
    Il y a des instructions qui prennent du temps sans qu'on puisse prédire combien.
