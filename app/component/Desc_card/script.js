@@ -13,7 +13,7 @@ Card_desc.format = function(card){
     html = html.replace('{{duree}}', card.length);
     html = html.replace('{{date}}', card.year);
     html = html.replace('{{age}}', card.min_age);
-    html = html.replace('{{categorie}}', card.id_category);
+    html = html.replace('{{categorie}}', card.category);
     html = html.replace('{{trailer}}', card.trailer);
     return html;
 }

@@ -10,8 +10,8 @@ body{
 
 .card__container{
     display: flex;
-    /* align-items: center;
-    justify-content: center; */
+    align-items: center;
+    justify-content: center; 
     flex-direction: row;
     /* flex-wrap: wrap; */
     height: 20rem;
@@ -50,4 +50,6 @@ body{
     flex-wrap: wrap;
     gap: 2rem;
     /* width: 100%; */
+    align-items: center;
+    justify-content: center;
 }
