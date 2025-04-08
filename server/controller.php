@@ -94,13 +94,13 @@ function readCategoriesController() {
         return $categories;
     } else {
         return "Les catégories n'ont pas pu être récupérer";
-    }
+    };
 }
 
 function readMovieCategoryController() {
-    $category = $_REQUEST['category'];
+    $id = $_REQUEST['id'];
 
-    $movies = getMovieCategories($category);
+    $movies = getMovieCategories($id);
 
     if ($movies != 0) {
         return $movies;
@@ -108,3 +108,16 @@ function readMovieCategoryController() {
         return "La catégorie $category de ces films n'a pas été récupéré";
     }
 }
+
+
+// function readMovieCategoryController() {
+//     $category = $_REQUEST['category'];
+
+//     $movies = getMovieCategories($category);
+
+//     if ($movies != 0) {
+//         return $movies;
+//     } else {
+//         return "La catégorie $category de ces films n'a pas été récupéré";
+//     }
+// }

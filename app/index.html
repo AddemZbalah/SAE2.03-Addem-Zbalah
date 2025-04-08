@@ -11,10 +11,11 @@
     <header id="header"></header>
 
     <section id="content">
-      <div id="card__contain"></div>
+      <div id="movie-container" class="movie-container"></div>
+      <div id="card" class="card"></div>
     </section>
 
-    <section id="card" class="card"></section>
+    <!-- <section id="card" class="card"></section> -->
 
     <script type="module">
       import { NavBar } from "./component/NavBar/script.js";
@@ -64,7 +65,7 @@
 
     C.getMovieCategories = async function(){
       let categories = await DataMovie.requestCategory();
-      let html = await MovieCategory.format(categories);
+      let html = await MovieCategory.formatMany(categories);
       V.renderMovieCategories(html);
     };
 
@@ -92,13 +93,13 @@
       };
 
       V.renderMovieDetails = function (movie) {
-        let cards = document.querySelector("#card");
+        let cards = document.querySelector("#content");
         cards.innerHTML = Card_desc.format(movie);
       };
 
       V.renderMovieCategories = function (html) {
-        let cards = document.querySelector("#card");
-        cards.innerHTML = html;
+        let content = document.querySelector("#movie-container");
+        content.innerHTML = html;
       };
 
 

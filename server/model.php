@@ -105,13 +105,13 @@ function getCategory(){
 function getMovieCategories($category){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     $sql = "SELECT Movie.id, Movie.name, Movie.director, Movie.year, Movie.length, Movie.description, Movie.image, Movie.trailer, Movie.min_age, Movie.id_category, Category.name 
-    AS category FROM Movie JOIN Category ON Movie.id_category = Category.id WHERE Category.name = :category";
+    AS category FROM Movie JOIN Category ON Movie.id_category = Category.id WHERE Category.id = :category";
     $stmt = $cnx->prepare($sql);
 
     $stmt->bindParam(':category', $category);
     $stmt->execute();
 
-    $movieCategory = $stmt->fetch(PDO::FETCH_OBJ);
+    $movieCategory = $stmt->fetchAll(PDO::FETCH_OBJ);
 
     return $movieCategory;
 

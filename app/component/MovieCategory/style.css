@@ -1,3 +1,16 @@
 .movie-category__title{
     color: black;
 }
+
+/* .movie-category{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: rgb(68, 66, 105); 
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.movie-category__title{
+
+    font-size: 1rem;
+} */
