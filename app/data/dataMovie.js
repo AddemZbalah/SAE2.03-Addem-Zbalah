@@ -48,7 +48,7 @@ DataMovie.requestCategory = async function(){
     // fetch permet d'envoyer une requête HTTP à l'URL spécifiée. 
     // L'URL est construite en concaténant HOST_URL à "/server/script.php?direction=" et la valeur de la variable dir. 
     // L'URL finale dépend de la valeur de HOST_URL et de dir.
-        let answer = await fetch(HOST_URL + "/server/script.php?todo=readcategories");
+        let answer = await fetch(HOST_URL + "/server/script.php?todo=readcategory");
         let data = await answer.json();
         return data;
 

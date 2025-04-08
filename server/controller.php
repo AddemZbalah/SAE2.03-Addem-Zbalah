@@ -88,19 +88,19 @@ function readMovieDetailsController(){
     }
 
 function readCategoriesController() {
-    $categories = getCategories();
+    $categories = getCategory();
 
     if ($categories != 0){
         return $categories;
     } else {
-        return "Les catégories n'ont pas pu être mise";
+        return "Les catégories n'ont pas pu être récupérer";
     }
 }
 
 function readMovieCategoryController() {
     $category = $_REQUEST['category'];
 
-    $movies = getMovieCatgory($category);
+    $movies = getMovieCategories($category);
 
     if ($movies != 0) {
         return $movies;
