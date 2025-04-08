@@ -2,6 +2,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-direction: row;
+  width: 100%;
   padding: 1rem 3rem;
   color: var(--color-fg);
   background-color: var(--color-bg);
@@ -18,4 +20,9 @@
       --_offset: 0.5rem;
     }
   }
+}
+
+.navbar__list{
+  display: flex;
+  flex-direction: row;
 }

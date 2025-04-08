@@ -29,7 +29,7 @@
 }
 
 ::placeholder{
-    color:rgba(255, 255, 255, 0.689);
+    color:rgb(255, 255, 255);
 }
 
 .form__saisi{
