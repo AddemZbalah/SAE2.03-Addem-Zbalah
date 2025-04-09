@@ -137,3 +137,10 @@ function addUserProfileController(){
         return "Le profile n'a pas pu être ajouté";
       }
   }
+
+
+  function getUserProfileController(){
+    $profiles = getAllUserProfiles();
+    return $profiles;
+    exit();
+}

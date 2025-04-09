@@ -29,6 +29,11 @@ body{
 
 }
 
+.card__container:hover {
+    transform: scale(1.02);
+    transition: ease-in-out 0.3s;
+}
+
 .card__title{
     /* height: 100%; */
     width: 100%;

@@ -133,3 +133,12 @@ function addUserProfile($name, $avatar, $min_age) {
     $res = $stmt->rowCount();
     return $res; 
 }
+
+function getAllUserProfiles(){
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    $sql = "SELECT * FROM `Profile`";
+    $stmt = $cnx->prepare($sql);
+    $stmt->execute();
+    $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+    return $res;
+}
