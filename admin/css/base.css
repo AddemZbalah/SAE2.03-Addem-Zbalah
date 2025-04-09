@@ -21,13 +21,16 @@ body {
 
 /* Style commun pour les sections */
 section {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     max-width: 40rem;
     margin: 0 auto;
+    gap: 2rem;
 }
 
 /* Container commun pour les formulaires */
-.form__container, .addUserProfile {
+.form__container, .profile {
     width: 100%;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -38,7 +41,7 @@ section {
 }
 
 /* Style commun pour les inputs */
-.form__input, .addUserProfile__input, .form__textarea {
+.form__input, .addUserProfile__input, .form__textarea{
     width: 100%;
     padding: 1rem 1.5rem;
     margin-bottom: 1.5rem;
@@ -148,4 +151,8 @@ section {
     .form__saisi, .addUserProfile__title {
         font-size: 1.2rem;
     }
+}
+
+option{
+    color: black;
 }
