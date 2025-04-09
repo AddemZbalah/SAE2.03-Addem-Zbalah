@@ -116,3 +116,20 @@ function getMovieCategories($category){
     return $movieCategory;
 
 }
+
+function addUserProfile($name, $avatar, $min_age) {
+    $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
+
+    $sql = "INSERT INTO Profile (name, avatar, min_age) 
+            VALUES (:name, :avatar, :min_age)";
+
+    $stmt = $cnx->prepare($sql);
+
+    $stmt->bindParam(':name', $name);
+    $stmt->bindParam(':avatar', $avatar);
+    $stmt->bindParam(':min_age', $min_age);
+
+    $stmt->execute();
+    $res = $stmt->rowCount();
+    return $res; 
+}

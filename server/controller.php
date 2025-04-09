@@ -121,3 +121,19 @@ function readMovieCategoryController() {
 //         return "La catégorie $category de ces films n'a pas été récupéré";
 //     }
 // }
+
+function addUserProfileController(){
+    
+    $name = $_REQUEST['name'];
+    $avatar = $_REQUEST['avatar'];
+    $min_age = $_REQUEST['min_age'];
+  
+    $ok = addUserProfile($name, $avatar, $min_age);
+   
+    if ($ok!=0){
+        return "$name a été ajouté avec succès";
+      }
+      else{
+        return "Le profile n'a pas pu être ajouté";
+      }
+  }

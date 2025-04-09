@@ -11,8 +11,9 @@
     <header id="header"></header>
 
     <section id="content">
-      <div id="movie-container" class="movie-container"></div>
       <div id="card" class="card"></div>
+      <div id="movie-category" class="movie-category"></div>
+      <!-- <div id="card" class="card"></div> -->
     </section>
 
     <!-- <section id="card" class="card"></section> -->
@@ -98,7 +99,7 @@
       };
 
       V.renderMovieCategories = function (html) {
-        let content = document.querySelector("#movie-container");
+        let content = document.querySelector("#card");
         content.innerHTML = html;
       };
 
