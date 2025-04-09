@@ -7,3 +7,145 @@
 @import "../component/Log/style.css" layer(components);
 @import "../component/formulaire/style.css" layer(components);
 @import "../component/ProfileForm/style.css" layer(components);
+
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+/* Style commun pour les sections */
+section {
+    width: 100%;
+    max-width: 40rem;
+    margin: 0 auto;
+}
+
+/* Container commun pour les formulaires */
+.form__container, .addUserProfile {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* Style commun pour les inputs */
+.form__input, .addUserProfile__input, .form__textarea {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+/* Focus des inputs */
+.form__input:focus, .addUserProfile__input:focus, .form__textarea:focus {
+    outline: none;
+    border-color: #00fff5;
+    box-shadow: 0 0 0 2px rgba(0, 255, 245, 0.2);
+}
+
+/* Style pour les placeholders */
+::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Textarea spécifique */
+.form__textarea {
+    min-height: 10rem;
+    resize: vertical;
+}
+
+/* Titres */
+.form__saisi, .addUserProfile__title {
+    color: #00fff5;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+}
+
+/* Boutons */
+.form__btn, .addUserProfile__input[type="button"] {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, #00fff5, #00d9ff);
+    border: none;
+    border-radius: 0.5rem;
+    color: #1a1a2e;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form__btn:hover, .addUserProfile__input[type="button"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 245, 0.4);
+}
+
+/* Log section */
+.log {
+    width: 100%;
+    max-width: 40rem;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    padding: 1rem;
+}
+
+.log__list {
+    color: #00fff5;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Animation pour les éléments */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* Media Queries */
+@media screen and (max-width: 48rem) {
+    body {
+        padding: 1rem;
+    }
+
+    .form__container, .addUserProfile {
+        padding: 1.5rem;
+    }
+
+    .form__input, .addUserProfile__input {
+        padding: 0.8rem 1rem;
+    }
+
+    .form__saisi, .addUserProfile__title {
+        font-size: 1.2rem;
+    }
+}

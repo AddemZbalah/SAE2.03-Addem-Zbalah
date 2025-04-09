@@ -6,7 +6,7 @@ let formulaire = {};
 
 formulaire.format = function(handler){
     let html = template;
-    html = html.replace('{{handler}}', handler);
+    html = html.replace('{{handlerAddMovie}}', handler);
     return html;
 
 }

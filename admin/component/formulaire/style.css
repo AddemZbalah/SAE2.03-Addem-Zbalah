@@ -1,68 +1,26 @@
-.form__container{
+.form {
+    width: 100%;
+}
+
+.form__title {
+    color: #00fff5;
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+
+.form__container {
     display: flex;
     flex-direction: column;
-    width: 25rem;
-    height: 45rem;
-    gap: 1rem;
-    padding: 1.5rem;
-    font-family: var(--ff-Bebas);
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 3.5px );
-    -webkit-backdrop-filter: blur( 3.5px );
-    border-radius: 10px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    background-color: rgba(39, 38, 38, 0.721);
+    gap: 1.5rem;
 }
 
-.form__input{
-    border: solid 1px rgba(57, 55, 55, 0.605);
-    height: 2rem;
-    padding: 1rem;
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 3.5px );
-    -webkit-backdrop-filter: blur( 3.5px );
-    border-radius: 30px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    
-}
-
-::placeholder{
-    color:rgb(255, 255, 255);
-}
-
-.form__saisi{
-    color:rgba(255, 255, 255, 0.689);
-    display: flex;
-    justify-content: center;
-    padding: 0;
-}
-
-.form__textarea{
-    height: 100%;
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 3.5px );
-    -webkit-backdrop-filter: blur( 3.5px );
-    border-radius: 30px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    padding: 1rem;
-}
-
-.form__btn{
-    background: rgba( 255, 255, 255, 0.25 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 3.5px );
-    -webkit-backdrop-filter: blur( 3.5px );
-    border-radius: 30px;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    padding: 1rem;
-    color: white;
-}
-
-.form__btn:hover{
-    color: grey;
-    background-color: white;
-    cursor:pointer;
+.form select.form__input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.5rem;
 }

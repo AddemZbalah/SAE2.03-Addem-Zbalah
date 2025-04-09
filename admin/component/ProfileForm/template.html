@@ -1,9 +1,10 @@
-<div class="addUserProfile"></div>
-    <h1 class="addUserProfile__title"> Ajouter un Profil</h1>
-    <form class="addUserProfile__form">
-        <input class="addUserProfile__input" type="text" name="name" placeholder="Nom " required>
-        <input class="addUserProfile__input" type="text" name="avatar" placeholder="Avatar" >
-        <input class="addUserProfile__input" type="text" name="min_age" placeholder="Age minimum"  required >
-        <input class="addUserProfile__input" onclick="{{handler}}" type="button" value="Ajouter" name="todo">
-    </form>
-</div>
+<form class="profile">
+    <h2 class="profile__title">Ajouter un profil</h2>
+    <div class="profile__container" id="profile__container">
+        <input type="text" class="profile__input" name="name" placeholder="Nom " required>
+        <input type="text" class="profile__input" name="avatar" placeholder="Avatar" >
+        <input class="profile__input" type="text" name="min_age" placeholder="Age minimum"  required >
+
+        <input class="profile__btn" onclick="{{handlerUser}}" type="button" value="Crée un profil" name="todo"/>
+    </div>
+</form>

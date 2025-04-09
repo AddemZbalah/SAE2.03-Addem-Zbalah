@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="./css/base.css" />
   </head>
   <body>
-    <section id="log"></section>
-    <section id="addMovie"></section>
-    <section  id="addProfile"></section>
+    <section id="content">
+      <section id="log"></section>
+
+    </section>
     
 
     <script type="module">
@@ -22,20 +23,17 @@
 
       window.C = {};
 
-      C.handlerUpdate = async function(){
-
-        let form = document.querySelector('.form__container');
-
-        let fd = new FormData(form);
-        let res = await DataMovie.update(fd);
-        V.renderLog(res);
-      };
+      C.handlerAddUserProfile = async function () {
+    let form = document.querySelector(".profile__form");
+    let fd = new FormData(form); 
+    let res = await DataProfile.addUserProfile(fd);
+    V.renderLog(res);
+};
 
       C.handlerAddUserProfile = async function () {
-        let form = document.querySelector(".addUserProfile__form");
-
+        let form = document.querySelector(".profile");
         let fd = new FormData(form); 
-        let res = await DataProfile.addProfile(fd);
+        let res = await DataProfile.addUserProfile(fd);
         V.renderLog(res);
       };
 
@@ -54,15 +52,15 @@
       };
 
       V.renderMovie = function (handler) {
-        let content = document.querySelector("#addMovie");
-        content.innerHTML = formulaire.format(handler);
+        let content = document.querySelector("#content");
+        content.innerHTML += formulaire.format(handler);
       };
 
       V.renderAddUserProfile = function (handler) {
-        let content = document.querySelector("#addProfile");
-        content.innerHTML = ProfileForm.format(handler);
+        let content = document.querySelector("#content");
+        content.innerHTML += ProfileForm.format(handler);
       };
-
+      
       C.start();
     </script>
   </body>

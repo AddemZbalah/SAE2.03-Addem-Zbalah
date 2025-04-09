@@ -21,7 +21,7 @@ MovieCategory.formatMany = async function(categories){
     for (const elt of categories) {
         const movies = await DataMovie.requestMovieCategories(elt.id);
         if (movies.length == 0) {
-            continue
+            continue;
         }
         else{
             html += MovieCategory.format(elt.name, movies);

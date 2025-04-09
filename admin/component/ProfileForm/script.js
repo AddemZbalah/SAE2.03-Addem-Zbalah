@@ -6,7 +6,7 @@ let ProfileForm = {};
 
 ProfileForm.format = function(handler){
     let html= template;
-    html = html.replace('{{handler}}', handler);
+    html = html.replace('{{handlerUser}}', handler);
     return html;
 }
 
