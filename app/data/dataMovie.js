@@ -43,15 +43,17 @@ DataMovie.requestCategory = async function(){
     
     }
 
-DataMovie.requestMovieCategories = async function(idcategory){
-    // fetch permet d'envoyer une requête HTTP à l'URL spécifiée. 
-    // L'URL est construite en concaténant HOST_URL à "/server/script.php?direction=" et la valeur de la variable dir. 
-    // L'URL finale dépend de la valeur de HOST_URL et de dir.
-        let answer = await fetch(HOST_URL + "/server/script.php?todo=readmoviescategory&id=" + idcategory);
+    DataMovie.requestMovieCategories = async function(idcategory, age){
+        // Si age est -1 ou undefined, ne pas ajouter de filtre d'âge
+        let url = HOST_URL + "/server/script.php?todo=readmoviescategory&id=" + idcategory;
+        // N'ajouter le filtre d'âge que si age est défini et différent de -1
+        if (age !== undefined && age !== -1) {
+            url += "&min_age=" + age;
+        }
+        let answer = await fetch(url);
         let data = await answer.json();
         return data;
-
-}
+    }
 
 
 /* C'EST QUOI async/await ?

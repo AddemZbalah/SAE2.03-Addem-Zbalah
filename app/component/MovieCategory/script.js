@@ -16,10 +16,10 @@ MovieCategory.format = function(category, movies) {
     return html
 };
 
-MovieCategory.formatMany = async function(categories){
+MovieCategory.formatMany = async function(categories,min_age){
     let html = "";
     for (const elt of categories) {
-        const movies = await DataMovie.requestMovieCategories(elt.id);
+        const movies = await DataMovie.requestMovieCategories(elt.id, min_age);
         if (movies.length == 0) {
             continue;
         }
@@ -27,6 +27,13 @@ MovieCategory.formatMany = async function(categories){
             html += MovieCategory.format(elt.name, movies);
         }
     }
+
+    if (html === "") {
+        html = `<div class="movie-category__empty">
+                  <p>Aucun film disponible pour votre tranche d'âge.</p>
+                </div>`;
+    }
+
     return html;
 };
 

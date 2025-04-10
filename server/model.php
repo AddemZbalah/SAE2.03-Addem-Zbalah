@@ -102,19 +102,32 @@ function getCategory(){
 }
 
 
-function getMovieCategories($category){
+function getMovieCategories($category, $age = null){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    $sql = "SELECT Movie.id, Movie.name, Movie.director, Movie.year, Movie.length, Movie.description, Movie.image, Movie.trailer, Movie.min_age, Movie.id_category, Category.name 
-    AS category FROM Movie JOIN Category ON Movie.id_category = Category.id WHERE Category.id = :category";
-    $stmt = $cnx->prepare($sql);
-
-    $stmt->bindParam(':category', $category);
+    
+    // Si age n'est pas défini, sélectionner tous les films de la catégorie
+    if ($age == null) {
+        $sql = "SELECT Movie.*, Category.name AS category 
+                FROM Movie 
+                JOIN Category ON Movie.id_category = Category.id 
+                WHERE Category.id = :category
+                ORDER BY Movie.name ASC";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':category', $category);
+    } else {
+        // Sinon, filtrer par âge
+        $sql = "SELECT Movie.*, Category.name AS category 
+                FROM Movie 
+                JOIN Category ON Movie.id_category = Category.id 
+                WHERE Category.id = :category 
+                AND Movie.min_age <= :age";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':category', $category);
+        $stmt->bindParam(':age', $age);
+    }
+    
     $stmt->execute();
-
-    $movieCategory = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-    return $movieCategory;
-
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
 }
 
 function addUserProfile($name, $avatar, $min_age) {
@@ -142,3 +155,15 @@ function getAllUserProfiles(){
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res;
 }
+
+// function getMoviesOrderByAge($age){
+//     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+//     $sql = "SELECT id, name, year, description, length, director, id_category, min_age, trailer, image FROM Movie
+//             WHERE min_age <= 8
+//             ORDER BY Movie.min_age ASC";
+//     $stmt = $cnx->prepare($sql);
+//     $stmt->bindParam(':age', $age);
+//     $stmt->execute();
+//     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
+//     return $res;
+// }

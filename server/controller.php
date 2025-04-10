@@ -99,8 +99,9 @@ function readCategoriesController() {
 
 function readMovieCategoryController() {
     $id = $_REQUEST['id'];
+    $age = $_REQUEST['min_age'];
 
-    $movies = getMovieCategories($id);
+    $movies = getMovieCategories($id, $age);
 
     if ($movies != 0) {
         return $movies;
@@ -144,3 +145,9 @@ function addUserProfileController(){
     return $profiles;
     exit();
 }
+
+// function getMoviesOrderByAgeController(){
+//     $moviesorder = getMoviesOrderByAge();
+//     return $profiles;
+//     exit();
+// }

@@ -61,23 +61,35 @@ C.handleProfileChange = function(profileId) {
     let select = document.getElementById('profileSelect');
     let avatarImg = document.getElementById('navbar__profileAvatar');
     
-    if (select.selectedIndex > 0) {
-        let avatarUrl = select.options[select.selectedIndex].getAttribute('data-avatar');
+    // Si l'option par défaut est sélectionnée (index 0)
+    if (select.selectedIndex === 0) {
+        avatarImg.classList.add('hidden');
+        // Afficher tous les films sans restriction d'âge
+        C.getMovieCategories(-1); // On utilise -1 pour indiquer "pas de restriction"
+        return;
+    }
+    
+    // Si un profil est sélectionné
+    let selectedOption = select.options[select.selectedIndex];
+    let avatarUrl = selectedOption.getAttribute('data-avatar');
+    let minAge = selectedOption.getAttribute('data-min-age');
+    
+    if (avatarUrl) {
         avatarImg.src = avatarUrl;
         avatarImg.classList.remove('hidden');
-        console.log("Avatar chargé:", avatarUrl);
-    } else {
-        avatarImg.src = "";
-        avatarImg.classList.add('hidden');
     }
+    
+    // Appliquer le filtre d'âge
+    C.getMovieCategories(minAge);
 };
 
+// Modifier aussi la fonction start pour passer null au lieu de 0
 
       C.start = async function () {
-        let profileOptions = await C.getProfiles();
-        V.renderNavBar("C.handlerAbout()", profileOptions);
-        // C.getMovie();
-        C.getMovieCategories();
+          let profileOptions = await C.getProfiles();
+          V.renderNavBar("C.handlerAbout()", profileOptions);
+    // Au démarrage, on passe 0 pour voir tous les films
+          C.getMovieCategories(-1);
       };
 
       C.getMovie = async function(){
@@ -90,9 +102,9 @@ C.handleProfileChange = function(profileId) {
       V.renderCard(data);
     };
 
-    C.getMovieCategories = async function(){
+    C.getMovieCategories = async function(min_age){
       let categories = await DataMovie.requestCategory();
-      let html = await MovieCategory.formatMany(categories);
+      let html = await MovieCategory.formatMany(categories, min_age);
       V.renderMovieCategories(html);
     };
 
@@ -110,8 +122,11 @@ C.handleProfileChange = function(profileId) {
         let options = "";
         for(let i = 0; i < profiles.length; i++) {
             let avatarPath = "../server/images/" + profiles[i].avatar;
-            console.log("Chemin avatar:", avatarPath);
-            options += `<option value="${profiles[i].id}" data-avatar="${avatarPath}">${profiles[i].name}</option>`;
+            options += `<option value="${profiles[i].id}" 
+                               data-avatar="${avatarPath}"
+                               data-min-age="${profiles[i].min_age}">
+                        ${profiles[i].name}
+                       </option>`;
         }
         return options;
     } catch (error) {
