@@ -1,0 +1,9 @@
+<div class="addNewProfile">
+    <h4 class="addNewProfile__title"># Ajouter un Profil ou le modifier</h4>
+    <form class="addNewProfile__form">
+      <input required type="text" name="Nom" placeholder="nom du profil" pattern="[^0-9]*" title="Saisissez votre nom de profil"/>
+      <input required type="text" name="Age" placeholder="Age du profil" pattern="[^0-9]*" title="Saisissez votre âge"/>
+      <input required type="file" name="file" accept=".jpg,.jpeg,.png,.gif" title="Veuillez insérer votre image"/>
+      <input onclick="{{handler}}" type="button" value="add" name="todo" />
+    </form>
+  </div>

@@ -151,3 +151,32 @@ function addUserProfileController(){
 //     return $profiles;
 //     exit();
 // }
+
+function addNewProfileController() {
+    try {
+        if (empty($_REQUEST['Nom'])) {
+            return "Erreur : Le Nom est obligatoire.";
+        }
+        
+        if (empty($_REQUEST['Age'])) {
+            return "Erreur : L'Age est obligatoire.";
+        }
+        
+        $Nom = $_REQUEST['Nom'];
+        $Age = $_REQUEST['Age'];
+        $file = "default-avatar.png";
+
+        if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+            $upload_dir = "./images/";
+            $filename = basename($_FILES['file']['name']);
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $upload_dir . $filename)) {
+                $file = $filename;
+            }
+        }
+
+        $ok = addProfil($Nom, $Age, $file);
+        return $ok ? "Profil ajouté avec succès" : "Erreur lors de l'ajout du profil";
+    } catch (Exception $e) {
+        return "Erreur: " . $e->getMessage();
+    }
+}

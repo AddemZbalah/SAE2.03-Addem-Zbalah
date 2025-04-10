@@ -47,7 +47,7 @@ DataMovie.requestCategory = async function(){
         // Si age est -1 ou undefined, ne pas ajouter de filtre d'âge
         let url = HOST_URL + "/server/script.php?todo=readmoviescategory&id=" + idcategory;
         // N'ajouter le filtre d'âge que si age est défini et différent de -1
-        if (age !== undefined && age !== -1) {
+        if (age != undefined && age != -1) {
             url += "&min_age=" + age;
         }
         let answer = await fetch(url);

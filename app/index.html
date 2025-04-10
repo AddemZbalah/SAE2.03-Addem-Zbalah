@@ -62,7 +62,7 @@ C.handleProfileChange = function(profileId) {
     let avatarImg = document.getElementById('navbar__profileAvatar');
     
     // Si l'option par défaut est sélectionnée (index 0)
-    if (select.selectedIndex === 0) {
+    if (select.selectedIndex == 0) {
         avatarImg.classList.add('hidden');
         // Afficher tous les films sans restriction d'âge
         C.getMovieCategories(-1); // On utilise -1 pour indiquer "pas de restriction"
@@ -110,29 +110,25 @@ C.handleProfileChange = function(profileId) {
 
 
     C.getProfiles = async function() {
-    try {
+    // try {
         let profiles = await DataProfile.request();
         console.log("Profiles reçus:", profiles);
         
-        if (!profiles || profiles.length === 0) {
+        if (!profiles || profiles.length == 0) {
             console.log("Aucun profil trouvé");
             return "";
         }
         
         let options = "";
         for(let i = 0; i < profiles.length; i++) {
-            let avatarPath = "../server/images/" + profiles[i].avatar;
-            options += `<option value="${profiles[i].id}" 
-                               data-avatar="${avatarPath}"
-                               data-min-age="${profiles[i].min_age}">
-                        ${profiles[i].name}
-                       </option>`;
+            let avatar_img = "../server/images/" + profiles[i].avatar;
+            options += `<option value="${profiles[i].id}"data-avatar="${avatar_img}"data-min-age="${profiles[i].min_age}">${profiles[i].name}</option>`;
         }
         return options;
-    } catch (error) {
-        console.error("Erreur dans getProfiles:", error);
-        return "";
-    }
+    // } catch (error) {
+    //     console.error("Erreur dans getProfiles:", error);
+    //     return "";
+    // }
 };
 
     

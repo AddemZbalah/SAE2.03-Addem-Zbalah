@@ -16,6 +16,7 @@
     <script type="module">
       import { Log } from "./component/Log/script.js";
       import { formulaire } from "./component/formulaire/script.js";
+      import { AddNewProfilForm } from "./component/NewProfileForm/script.js";
       import { DataMovie } from "./data/dataMovie.js"
       import { ProfileForm } from "./component/ProfileForm/script.js";
       import { DataProfile } from "./data/dataProfile.js";
@@ -37,11 +38,19 @@
         V.renderLog(res);
       };
 
+      C.handleraddNewProfile = async function () {
+        let form = document.querySelector(".addNewProfile__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.addNewProfile(fd);
+        V.renderLog(res); 
+      };
+
 
       C.start = function () {
         V.renderLog("Démarrage de l'application");
         V.renderMovie("C.handlerUpdate()");
         V.renderAddUserProfile ("C.handlerAddUserProfile()");
+        V.renderaddNewProfile ("C.handleraddNewProfile()");
       };
 
       window.V = {};
@@ -59,6 +68,11 @@
       V.renderAddUserProfile = function (handler) {
         let content = document.querySelector("#content");
         content.innerHTML += ProfileForm.format(handler);
+      };
+
+      V.renderaddNewProfile = function (handler) {
+        let content = document.querySelector("#content");
+        content.innerHTML += AddNewProfilForm.format(handler);
       };
       
       C.start();

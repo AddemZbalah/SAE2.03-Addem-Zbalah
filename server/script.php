@@ -78,6 +78,10 @@ if ( isset($_REQUEST['todo']) ){
     case 'getUsersProfiles':
       $data= getUserProfileController();
       break;
+    
+    case 'addNewProfile':
+      $data = addNewProfileController();
+      break;
 
     // case 'getmovieorderbyage':
     //   $data= getMoviesOrderByAgeController();
