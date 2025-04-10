@@ -23,6 +23,7 @@
       import { DataMovie } from "./data/dataMovie.js";
       import { Card_desc } from "./component/Desc_card/script.js";
       import { MovieCategory } from "./component/MovieCategory/script.js";
+      import { DataProfile } from "./data/dataProfile.js";
       
 
 
@@ -39,18 +40,49 @@
 
       C.handlerDetail = async function (id) {
         let movie = await DataMovie.requestMovieDetails(id);
-        if (movie.length == 0){
-          movie = [
-            {name: 'Soon...', category: 'Soon...', img:'Soon...', director:'Soon...', length: 'Soon...', description:'Soon...', id_category: 'Soon...', image:'Soon...', trailer:'Soon...', min_age:'Soon...'}
-          ]
+        if (movie.length == 0) {
+          movie = {
+              name: 'Soon...', 
+              category: 'Soon...', 
+              img:'Soon...', 
+              director:'Soon...', 
+              length: 'Soon...', 
+              description:'Soon...', 
+              id_category: 'Soon...', 
+              image:'Soon...', 
+              trailer:'Soon...', 
+              min_age:'Soon...'
+        };
+    }
+    V.renderMovieDetails(movie);
+};
+
+C.handleProfileChange = function(avatar) {
+    let select = document.getElementById('profileSelect');
+    let avatarImg = document.getElementById('navbar__profileAvatar');
+    
+    // Vérifier si une option est sélectionnée
+    if (select.selectedIndex > 0) { // > 0 pour ignorer l'option par défaut
+        let avatarUrl = select.options[select.selectedIndex].getAttribute('data-avatar');
+        
+        // Afficher l'avatar et mettre à jour l'image
+        avatarImg.classList.remove('hidden');
+        if (avatarUrl) {
+            avatarImg.src = avatarUrl;
+        } else {
+            avatarImg.src = "https://mmi.unilim.fr/~zbalah3/SAE2.03-Addem-Zbalah/server/images/default-avatar.png";
         }
+        console.log("Profil sélectionné : " + avatar);
+    } else {
+        // Cacher l'avatar si aucun profil n'est sélectionné
+        avatarImg.classList.add('hidden');
+    }
+};
 
-        V.renderMovieDetails(movie);
-      };
 
-
-      C.start = function () {
-        V.renderNavBar("C.handlerAbout()");
+      C.start = async function () {
+        let profileOptions = await C.getProfiles();
+        V.renderNavBar("C.handlerAbout()", profileOptions);
         // C.getMovie();
         C.getMovieCategories();
       };
@@ -72,6 +104,23 @@
     };
 
 
+    C.getProfiles = async function() {
+    let profiles = await DataProfile.request();
+    let options = "";
+    const HOST_URL = "https://mmi.unilim.fr/~zbalah3/SAE2.03-Addem-Zbalah/server/images/";
+  
+    // Boucle simple pour créer les options
+    for(let i = 0; i < profiles.length; i++) {
+        // Ajouter le chemin complet pour l'avatar
+        let avatarPath = HOST_URL + profiles[i].avatar;
+        options += `<option value="${profiles[i].id}" data-avatar="${avatarPath}">${profiles[i].name}</option>`;
+    }
+    return options;
+};
+
+    
+
+
 
       // Vue (contient tout ce qui est relatif à l'affichage)
       window.V = {};
@@ -83,9 +132,9 @@
        * Elle sélectionne l'élément HTML avec l'ID "header" et y insère le contenu
        * formaté par le composant NavBar.
        */
-      V.renderNavBar = function (hAbout) {
+      V.renderNavBar = function (hAbout, profileOptions) {
         let header = document.querySelector("#header");
-        header.innerHTML = NavBar.format(hAbout);
+        header.innerHTML = NavBar.format(hAbout, profileOptions);
         // header.innerHTML = NavBar.format(hHome);
       };
 

@@ -75,7 +75,7 @@ if ( isset($_REQUEST['todo']) ){
       $data= addUserProfileController();
       break;
 
-    case 'getAllUserProfiles':
+    case 'getUsersProfiles':
       $data= getUserProfileController();
       break;
 
