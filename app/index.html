@@ -57,24 +57,17 @@
     V.renderMovieDetails(movie);
 };
 
-C.handleProfileChange = function(avatar) {
+C.handleProfileChange = function(profileId) {
     let select = document.getElementById('profileSelect');
     let avatarImg = document.getElementById('navbar__profileAvatar');
     
-    // Vérifier si une option est sélectionnée
-    if (select.selectedIndex > 0) { // > 0 pour ignorer l'option par défaut
+    if (select.selectedIndex > 0) {
         let avatarUrl = select.options[select.selectedIndex].getAttribute('data-avatar');
-        
-        // Afficher l'avatar et mettre à jour l'image
+        avatarImg.src = avatarUrl;
         avatarImg.classList.remove('hidden');
-        if (avatarUrl) {
-            avatarImg.src = avatarUrl;
-        } else {
-            avatarImg.src = "https://mmi.unilim.fr/~zbalah3/SAE2.03-Addem-Zbalah/server/images/default-avatar.png";
-        }
-        console.log("Profil sélectionné : " + avatar);
+        console.log("Avatar chargé:", avatarUrl);
     } else {
-        // Cacher l'avatar si aucun profil n'est sélectionné
+        avatarImg.src = "";
         avatarImg.classList.add('hidden');
     }
 };
@@ -105,17 +98,26 @@ C.handleProfileChange = function(avatar) {
 
 
     C.getProfiles = async function() {
-    let profiles = await DataProfile.request();
-    let options = "";
-    const HOST_URL = "https://mmi.unilim.fr/~zbalah3/SAE2.03-Addem-Zbalah/server/images/";
-  
-    // Boucle simple pour créer les options
-    for(let i = 0; i < profiles.length; i++) {
-        // Ajouter le chemin complet pour l'avatar
-        let avatarPath = HOST_URL + profiles[i].avatar;
-        options += `<option value="${profiles[i].id}" data-avatar="${avatarPath}">${profiles[i].name}</option>`;
+    try {
+        let profiles = await DataProfile.request();
+        console.log("Profiles reçus:", profiles);
+        
+        if (!profiles || profiles.length === 0) {
+            console.log("Aucun profil trouvé");
+            return "";
+        }
+        
+        let options = "";
+        for(let i = 0; i < profiles.length; i++) {
+            let avatarPath = "../server/images/" + profiles[i].avatar;
+            console.log("Chemin avatar:", avatarPath);
+            options += `<option value="${profiles[i].id}" data-avatar="${avatarPath}">${profiles[i].name}</option>`;
+        }
+        return options;
+    } catch (error) {
+        console.error("Erreur dans getProfiles:", error);
+        return "";
     }
-    return options;
 };
 
     
