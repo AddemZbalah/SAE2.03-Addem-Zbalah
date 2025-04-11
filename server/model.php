@@ -13,6 +13,11 @@
  * DBLOGIN : Nom d'utilisateur pour se connecter à la base de données.
  * DBPWD : Mot de passe pour se connecter à la base de données.
  */
+// define("HOST", "localhost");
+// define("DBNAME", "SAE203");
+// define("DBLOGIN", "usersae203");
+// define("DBPWD", "mdp_username203");
+
 define("HOST", "localhost");
 define("DBNAME", "zbalah3");
 define("DBLOGIN", "zbalah3");
@@ -168,18 +173,19 @@ function getAllUserProfiles(){
 //     return $res;
 // }
 
-function addNewProfile($Nom, $Age, $file) {
+function addNewProfile($Nom, $Age, $file, $id) {
     // Connexion à la base de données
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
     // Requête SQL d'insertion du profil
-    $sql = "INSERT INTO Profil (name, age, image) VALUES (:name, :age, :image) ON DUPLICATE KEY UPDATE age = VALUES(age), image = VALUES(image);";
+    $sql = "UPDATE Profile SET name = :name, min_age = :min_age, avatar = :avatar WHERE id = :id;";
     $stmt = $cnx->prepare($sql);
 
     // Lie les paramètres
-    $stmt->bindParam(':name', $Nom, PDO::PARAM_STR);
-    $stmt->bindParam(':age', $Age, PDO::PARAM_INT);
-    $stmt->bindParam(':image', $file, PDO::PARAM_STR);
+    $stmt->bindParam(':name', $Nom);
+    $stmt->bindParam(':min_age', $Age);
+    $stmt->bindParam(':avatar', $file);
+    $stmt->bindParam(':id', $id);
 
     // Exécute la requête SQL
     $stmt->execute();

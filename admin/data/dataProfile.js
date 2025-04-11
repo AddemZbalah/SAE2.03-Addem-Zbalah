@@ -15,17 +15,16 @@ DataProfile.addUserProfile = async function (fdata) {
 
   DataProfile.addNewProfile = async function(formData) {
     try {
-        formData.append('todo', 'addNewProfile'); // Ajout explicite du paramètre todo
-        
+        // Ne pas ajouter todo ici car il est déjà dans l'URL
         let config = {
             method: "POST",
             body: formData
         };
         
-        let answer = await fetch(HOST_URL + "/server/script.php?todo=addNewProfile", config); // Correction du chemin
+        let answer = await fetch(HOST_URL + "/server/script.php?todo=addNewProfile", config);
         
         if (!answer.ok) {
-            throw new Error('Erreur serveur');
+            throw new Error('Erreur serveur: ' + await answer.text());
         }
         
         let text = await answer.text();
@@ -33,7 +32,7 @@ DataProfile.addUserProfile = async function (fdata) {
         
     } catch (error) {
         console.error("Erreur:", error);
-        return "Erreur lors de l'ajout du profil";
+        return "Erreur lors de l'ajout du profil: " + error.message;
     }
 };
   

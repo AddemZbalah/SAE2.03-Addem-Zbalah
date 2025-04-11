@@ -154,28 +154,41 @@ function addUserProfileController(){
 
 function addNewProfileController() {
     try {
-        if (empty($_REQUEST['Nom'])) {
+        if (empty($_POST['Nom'])) {
             return "Erreur : Le Nom est obligatoire.";
         }
         
-        if (empty($_REQUEST['Age'])) {
+        if (empty($_POST['Age'])) {
             return "Erreur : L'Age est obligatoire.";
         }
+
+        if (empty($_POST['id'])) {
+            return "Erreur : L'id est obligatoire.";
+        }
         
-        $Nom = $_REQUEST['Nom'];
-        $Age = $_REQUEST['Age'];
+        $Nom = $_POST['Nom'];
+        $Age = $_POST['Age'];
+        $id = $_POST['id'];
         $file = "default-avatar.png";
 
+        // Gestion du fichier
         if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
             $upload_dir = "./images/";
+            if (!is_dir($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+            
             $filename = basename($_FILES['file']['name']);
-            if (move_uploaded_file($_FILES['file']['tmp_name'], $upload_dir . $filename)) {
+            $upload_file = $upload_dir . $filename;
+            
+            if (move_uploaded_file($_FILES['file']['tmp_name'], $upload_file)) {
                 $file = $filename;
             }
         }
-
-        $ok = addProfil($Nom, $Age, $file);
+        // Appel de la fonction du modèle
+        $ok = addNewProfile($Nom, $Age, $file, $id);
         return $ok ? "Profil ajouté avec succès" : "Erreur lors de l'ajout du profil";
+        
     } catch (Exception $e) {
         return "Erreur: " . $e->getMessage();
     }
