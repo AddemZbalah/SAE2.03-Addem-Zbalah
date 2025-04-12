@@ -193,3 +193,16 @@ function addNewProfile($Nom, $Age, $file, $id) {
     // Retourne le nombre de lignes affectées
     return $stmt->rowCount();
 }
+
+
+// function toggleFavorite($movieid, $profileid) {
+//     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    
+//         // Essaie d'abord d'insérer
+//         $sql = "INSERT INTO Favorites (profile.id, movie.id) VALUES (:profile.id, :movie.id)";
+//         $stmt = $cnx->prepare($sql);
+//         $stmt->bindParam(':profile.id', $profileid);
+//         $stmt->bindParam(':movie.id', $movieid);
+//         $stmt->execute();
+//         return "Film ajouté aux favoris";
+// }

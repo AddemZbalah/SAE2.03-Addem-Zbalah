@@ -55,6 +55,25 @@ DataMovie.requestCategory = async function(){
         return data;
     }
 
+    // DataMovie.toggleFavorite = async function(movieid, profileid) {
+    //     if (!profileid) return false;
+        
+    //     let config = {
+    //         method: "POST",
+    //         body: movieid + ";" + profileid // Format simple pour les données
+    //     };
+        
+    //     let answer = await fetch(HOST_URL + "/server/script.php?todo=toggleFavorite", config);
+    //     return await answer.text();
+    // };
+    
+    // DataMovie.getFavorites = async function(profileid) {
+    //     if (!profileid) return [];
+        
+    //     let answer = await fetch(HOST_URL + "/server/script.php?todo=getFavorites&profileId=" + profileId);
+    //     return await answer.json();
+    // };
+
 
 /* C'EST QUOI async/await ?
     
