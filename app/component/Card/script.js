@@ -15,8 +15,14 @@ Card.format = function(card){
     html = html.replace('{{id_movie}}', card.id);
 
     if (card.isFavorite) {
-      html = html.replace("star_notactive.svg", "star_active.svg");
-  }
+        html = html.replace("star_notactive.svg", "star_active.svg");
+    }
+    // Affiche ou cache la croix selon showDelete
+    if (card.showDelete) {
+        html = html.replace('class="card__delfavorite-btn"', 'class="card__delfavorite-btn"');
+    } else {
+        html = html.replace('class="card__delfavorite-btn"', 'class="card__delfavorite-btn hidden"');
+    }
 
     return html;
 }

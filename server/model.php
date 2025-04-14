@@ -208,20 +208,23 @@ function addNewProfile($Nom, $Age, $file, $id) {
 // }
 
 function addFavorite($movie_id, $profile_id) {
-    // Connexion à la base de données
-    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL d'insertion du film
-    $sql = "INSERT INTO Favorites (movie_id, profile_id) 
-            VALUES (:movie_id, :profile_id)";
-    // Prépare la requête SQL
-    $stmt = $cnx->prepare($sql);
-    // Lie les paramètres
-    $stmt->bindParam(':movie_id', $movie_id);
-    $stmt->bindParam(':profile_id', $profile_id);
-    // Exécute la requête SQL
-    $stmt->execute();
-    // Retourne le nombre de lignes affectées
-    return $stmt->rowCount();
+    try {
+        $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+        // Vérifie si déjà favori
+        $check = $cnx->prepare("SELECT * FROM Favorites WHERE movie_id = :movie_id AND profile_id = :profile_id");
+        $check->execute(['movie_id' => $movie_id, 'profile_id' => $profile_id]);
+        if ($check->rowCount() > 0) {
+            return "Ce film est déjà dans vos favoris";
+        }
+        $sql = "INSERT INTO Favorites (movie_id, profile_id) VALUES (:movie_id, :profile_id)";
+        $stmt = $cnx->prepare($sql);
+        $stmt->bindParam(':movie_id', $movie_id);
+        $stmt->bindParam(':profile_id', $profile_id);
+        $stmt->execute();
+        return "Film ajouté aux favoris";
+    } catch (Exception $e) {
+        return "Erreur lors de l'ajout aux favoris";
+    }
 }
 
 function delFavorite($movie_id, $profile_id) {

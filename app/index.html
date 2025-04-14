@@ -40,6 +40,23 @@
         );
       };
 
+      C.handlerHome = function() {
+          let content = document.querySelector("#content");
+    // On remet la structure de base si elle n'existe plus
+          if (!document.querySelector("#movie-category")) {
+              content.innerHTML = `<div id="movie-category" class="movie-category"></div>`;
+          } else {
+              document.querySelector("#movie-category").style.display = "";
+              document.querySelector("#movie-category").innerHTML = "";
+        }
+        const currentUser = DataProfile.getCurrentUser();
+        let minAge = -1;
+        if (currentUser && currentUser.minAge) {
+            minAge = currentUser.minAge;
+        }
+        C.getMovieCategories(minAge);
+    };
+
       C.handlerDetail = async function (id) {
         let movie = await DataMovie.requestMovieDetails(id);
         if (movie.length == 0) {
@@ -86,6 +103,7 @@ C.handleFavorite = async function(movieId) {
     }
 
     const result = await DataMovie.addFavorite(movieId);
+    C.handlerHome();
     // const favoriteBtn = document.querySelector(`#${movieId} .favoris-icon`);
     
     if (result == "Film ajouté aux favoris") {
@@ -170,19 +188,22 @@ C.handleFavorite = async function(movieId) {
         alert("Veuillez sélectionner un profil");
         return;
     }
-
-    // Ajoute aux favoris
     const result = await DataMovie.addFavorite(movieId);
-    
-    // Change l'icône
     const card = document.getElementById(movieId);
-    const starBtn = card.querySelector('.card__favorite-btn');
-    const deleteBtn = card.querySelector('.card__delete-btn');
-    
-    starBtn.classList.add('hidden');
-    deleteBtn.classList.remove('hidden');
-    
-    alert("Film ajouté aux favoris");
+    if (card) {
+        const starBtn = card.querySelector('.card__favorite-btn');
+        const starIcon = card.querySelector('.card__favorite-btn .favoris-icon');
+        const deleteBtn = card.querySelector('.card__delete-btn');
+        if (starBtn && deleteBtn) {
+            starBtn.classList.add('hidden');
+            deleteBtn.classList.remove('hidden');
+        }
+        // Change l'image de l'étoile en jaune (active)
+        if (starIcon) {
+            starIcon.src = "../server/images/star_active.svg";
+        }
+    }
+    alert(result);
 };
 
 C.handleDeleteFavorite = async function(movieId) {
@@ -191,19 +212,25 @@ C.handleDeleteFavorite = async function(movieId) {
         alert("Veuillez sélectionner un profil");
         return;
     }
-
-    // Supprime des favoris
+    // Vérifie si le film est bien dans les favoris
+    const favorites = await DataMovie.getFavorites();
+    const isFavorite = favorites.some(movie => movie.id == movieId);
+    if (!isFavorite) {
+        alert("Ce film n'est pas dans vos favoris");
+        return;
+    }
     const result = await DataMovie.deleteFavorite(movieId);
-    
-    // Change l'icône
     const card = document.getElementById(movieId);
-    const starBtn = card.querySelector('.card__favorite-btn');
-    const deleteBtn = card.querySelector('.card__delete-btn');
-    
-    deleteBtn.classList.add('hidden');
-    starBtn.classList.remove('hidden');
-    
+    if (card) {
+        const starBtn = card.querySelector('.card__favorite-btn');
+        const deleteBtn = card.querySelector('.card__delete-btn');
+        if (starBtn && deleteBtn) {
+            deleteBtn.classList.add('hidden');
+            starBtn.classList.remove('hidden');
+        }
+    }
     alert("Film retiré des favoris");
+    C.handlerHome();
 };
 
 C.handleProfileChange = function(profileId) {
@@ -240,7 +267,7 @@ C.handleProfileChange = function(profileId) {
           let profileOptions = await C.getProfiles();
           V.renderNavBar("C.handlerAbout()", profileOptions);
     // Au démarrage, on passe 0 pour voir tous les films
-          C.getMovieCategories(-1);
+          C.handlerHome();
       };
 
       C.getMovie = async function(){
@@ -254,10 +281,37 @@ C.handleProfileChange = function(profileId) {
     };
 
     C.getMovieCategories = async function(min_age){
-      let categories = await DataMovie.requestCategory();
-      let html = await MovieCategory.formatMany(categories, min_age);
-      V.renderMovieCategories(html);
-    };
+    const currentUser = DataProfile.getCurrentUser();
+    let favorites = [];
+    if (currentUser) {
+        favorites = await DataMovie.getFavorites();
+    }
+    let categories = await DataMovie.requestCategory();
+    let html = "";
+
+    for (let i = 0; i < categories.length; i++) {
+        const elt = categories[i];
+        const movies = await DataMovie.requestMovieCategories(elt.id, min_age);
+        for (let j = 0; j < movies.length; j++) {
+            let movie = movies[j];
+            movie.isFavorite = false;
+            for (let k = 0; k < favorites.length; k++) {
+                if (favorites[k].id == movie.id) {
+                    movie.isFavorite = true;
+                    break;
+                }
+            }
+            movie.showDelete = false;
+        }
+        html += MovieCategory.format(elt.name, movies);
+    }
+
+    if (html === "") {
+        html = '<p>Aucun film disponible pour votre tranche d\'âge.</p>';
+  }
+
+    V.renderMovieCategories(html);
+};
 
 
     C.getProfiles = async function() {
@@ -267,6 +321,18 @@ C.handleProfileChange = function(profileId) {
     }
     return Profile.formatMany(profiles);
   };
+
+  C.showFavorites = async function() {
+    const currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        alert("Veuillez sélectionner un profil");
+        return;
+    }
+    // Récupère les favoris
+    const favorites = await DataMovie.getFavorites();
+    // Affiche les favoris dans la section principale
+    V.renderFavorites(favorites);
+};
 
     
 
@@ -294,14 +360,27 @@ C.handleProfileChange = function(profileId) {
       };
 
       V.renderMovieDetails = function (movie) {
-        let cards = document.querySelector("#content");
-        cards.innerHTML = Card_desc.format(movie);
+          let content = document.querySelector("#content");
+          content.innerHTML = Card_desc.format(movie);
+    // (ne mets pas le bouton ici)
       };
 
       V.renderMovieCategories = function (html) {
         let content = document.querySelector("#movie-category");
         content.innerHTML = html;
       };
+
+      V.renderFavorites = function(favorites) {
+        let html = "<h2>Mes Favoris</h2>";
+        for (let i = 0; i < favorites.length; i++) {
+            let fav = favorites[i];
+            fav.isFavorite = true;
+            fav.showDelete = true;
+            html += Card.format(fav);
+        }
+        let content = document.querySelector("#movie-category");
+        content.innerHTML = html;
+};
 
 
 

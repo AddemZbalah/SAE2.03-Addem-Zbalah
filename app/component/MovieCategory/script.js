@@ -11,7 +11,11 @@ MovieCategory.format = function(category, movies) {
     html = html.replace("{{title}}", category);
 
     let html2 = Card.formatMany(movies);
-    html = html.replace("{{movies}}", html2)
+    html = html.replace("{{movies}}", html2);
+
+    if (!movies || movies.length === 0) {
+        return ""; // Ne retourne rien si pas de films
+    }
 
     return html
 };
@@ -28,11 +32,11 @@ MovieCategory.formatMany = async function(categories,min_age){
         }
     }
 
-    if (html === "") {
-        html = `<div class="movie-category__empty">
-                  <p>Aucun film disponible pour votre tranche d'âge.</p>
-                </div>`;
-    }
+    // if (html === "") {
+    //     html = `<div class="movie-category__empty">
+    //               <p>Aucun film disponible pour votre tranche d'âge.</p>
+    //             </div>`;
+    // }
 
     return html;
 };
