@@ -1,3 +1,5 @@
+import {DataProfile} from "./dataProfile.js";
+
 
 // URL où se trouve le répertoire "server" sur mmi.unilim.fr
 let HOST_URL = "https://mmi.unilim.fr/~zbalah3/SAE2.03-Addem-Zbalah/";//"http://mmi.unilim.fr/~????"; // CHANGE THIS TO MATCH YOUR CONFIG
@@ -86,5 +88,41 @@ DataMovie.requestCategory = async function(){
    Et pour pouvoir utiliser await, il faut ajouter le mot clé async à la fonction.
 
 */
+
+DataMovie.addFavorite = async function(movieId) {
+    let currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        return "Veuillez sélectionner un profil";
+    }
+
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=addFavorite&movie_id=" + movieId + "&profile_id=" + currentUser.id);
+    console.log(answer);
+    let data = await answer.json();
+    return data;
+};
+
+    // DataMovie.addfavorite = async function (movie,profile) {
+    //     let config = {
+    //         method: "POST",
+    //     };
+    //     let answer = await fetch(HOST_URL + `/server/script.php?todo=addfavorite&profile_id=${profile.id}&movie_id=${movie.id}`, config);
+    //     let data = await answer.json();
+    //     return data;
+    // }
+
+    // DataMovie.delfavorite = async function (id) {
+    //     let config = {
+    //         method: "POST",
+    //     };
+    //     let answer = await fetch(HOST_URL + `/server/script.php?todo=delfavorite&profile_id=${profile.id}&movie_id=${movie.id}`, config);
+    //     let data = await answer.json();
+    //     return data;
+    // }
+    
+    // DataMovie.getfavorite = async function (id_user) {
+    //     let answer = await fetch(HOST_URL + `/server/script.php?todo=getfavoris&id_user=${profile.id}`);
+    //     let data = await answer.json();
+    //     return data;
+    // }
 
 export {DataMovie};

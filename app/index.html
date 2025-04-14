@@ -24,6 +24,8 @@
       import { Card_desc } from "./component/Desc_card/script.js";
       import { MovieCategory } from "./component/MovieCategory/script.js";
       import { DataProfile } from "./data/dataProfile.js";
+      import { Profile } from "./component/Profile/script.js";
+
       
 
 
@@ -57,34 +59,71 @@
     V.renderMovieDetails(movie);
 };
 
+C.addFavorite = async function(movieId) {
+    const currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        alert("Veuillez sélectionner un profil");
+        return;
+    }
+
+    const result = await DataMovie.addFavorite(movieId);
+    const favoriteBtn = document.querySelector(`.card[id="${movieId}"] .favoris-icon`);
+    
+    if (result === "Film ajouté aux favoris") {
+        favoriteBtn.src = "../server/images/star_active.svg";
+    }
+    
+    console.log(result);
+};
+
+C.handleFavorite = async function(movieId) {
+    const currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        alert("Veuillez sélectionner un profil");
+        return;
+    }
+
+    const result = await DataMovie.addFavorite(movieId);
+    // const favoriteBtn = document.querySelector(`#${movieId} .favoris-icon`);
+    
+    if (result == "Film ajouté aux favoris") {
+        // favoriteBtn.src = "../server/images/star_active.svg";
+        alert("Film ajouté aux favoris");
+    }
+    
+    console.log(result);
+};
+
 C.handleProfileChange = function(profileId) {
     let select = document.getElementById('profileSelect');
     let avatarImg = document.getElementById('navbar__profileAvatar');
     
-    // Si l'option par défaut est sélectionnée (index 0)
     if (select.selectedIndex == 0) {
         avatarImg.classList.add('hidden');
-        // Afficher tous les films sans restriction d'âge
-        C.getMovieCategories(-1); // On utilise -1 pour indiquer "pas de restriction"
+        DataProfile.setCurrentUser(null);
+        console.log("Utilisateur déconnecté, currentUser:", DataProfile.getCurrentUser());
+        C.getMovieCategories(-1);
         return;
     }
     
-    // Si un profil est sélectionné
     let selectedOption = select.options[select.selectedIndex];
-    let avatarUrl = selectedOption.getAttribute('data-avatar');
-    let minAge = selectedOption.getAttribute('data-min-age');
+    let currentUser = {
+        id: profileId,
+        name: selectedOption.getAttribute('data-profile-name'),
+        avatar: selectedOption.getAttribute('data-avatar'),
+        minAge: selectedOption.getAttribute('data-min-age')
+    };
     
-    if (avatarUrl) {
-        avatarImg.src = avatarUrl;
+    DataProfile.setCurrentUser(currentUser);
+    console.log("Nouvel utilisateur sélectionné:", DataProfile.getCurrentUser());
+    
+    if (currentUser.avatar) {
+        avatarImg.src = currentUser.avatar;
         avatarImg.classList.remove('hidden');
     }
     
-    // Appliquer le filtre d'âge
-    C.getMovieCategories(minAge);
+    C.getMovieCategories(currentUser.minAge);
 };
-
-// Modifier aussi la fonction start pour passer null au lieu de 0
-
       C.start = async function () {
           let profileOptions = await C.getProfiles();
           V.renderNavBar("C.handlerAbout()", profileOptions);
@@ -110,26 +149,12 @@ C.handleProfileChange = function(profileId) {
 
 
     C.getProfiles = async function() {
-    // try {
-        let profiles = await DataProfile.request();
-        console.log("Profiles reçus:", profiles);
-        
-        if (!profiles || profiles.length == 0) {
-            console.log("Aucun profil trouvé");
-            return "";
-        }
-        
-        let options = "";
-        for(let i = 0; i < profiles.length; i++) {
-            let avatar_img = "../server/images/" + profiles[i].avatar;
-            options += `<option value="${profiles[i].id}"data-avatar="${avatar_img}"data-min-age="${profiles[i].min_age}">${profiles[i].name}</option>`;
-        }
-        return options;
-    // } catch (error) {
-    //     console.error("Erreur dans getProfiles:", error);
-    //     return "";
-    // }
-};
+    let profiles = await DataProfile.request();
+    if (!profiles || profiles.length == 0) {
+        return "";
+    }
+    return Profile.formatMany(profiles);
+  };
 
     
 
@@ -167,9 +192,8 @@ C.handleProfileChange = function(profileId) {
       };
 
 
-      
+
       C.start(); // Démarre l'application
     </script>
   </body>
 </html>
-<script type="module"></script>

@@ -1,15 +1,8 @@
-<div class="card">
+<div class="card" id="{{id}}" onclick="C.handlerDetail({{id}})">
     <div class='card__container' style="--bg-card:url('../../../server/images/{{img}}')">
-        <!-- <img class="card__favoritebtn" src="{{fav_btn}}"/> -->
+        <button type="button" class="card__favorite-btn" onclick="event.stopPropagation(); C.handleFavorite({{id_movie}})">
+            <img src="../server/images/star_notactive.svg" class="favoris-icon" />
+        </button>
         <p class="card__title">{{title}}</p>
     </div>
 </div>
-
-
-
-
-<!-- <div class="card">
-        <div class='card__container' style="--bg-card:url('../../../server/images/{{img}}')" >
-            <p class="card__title">{{title}}</p>
-        </div>
-    </div> -->

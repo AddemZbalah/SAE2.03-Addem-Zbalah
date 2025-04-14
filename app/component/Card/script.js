@@ -10,6 +10,10 @@ Card.format = function(card){
     // html = html.replace("{{fav_btn}}", "../server/images/favorite.png");
     html = html.replace('{{title}}', card.name);
     html = html.replace('{{img}}', card.image);
+    html = html.replace('{{id}}', card.id);
+    html = html.replace('{{id_movie}}', card.id);
+
+
     return html;
 }
 

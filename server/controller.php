@@ -193,3 +193,31 @@ function addNewProfileController() {
         return "Erreur: " . $e->getMessage();
     }
 }
+
+function addFavoriteController(){
+    $movie_id = $_REQUEST['movie_id'];
+    $profile_id = $_REQUEST['profile_id'];
+    $ok = addFavorite($movie_id, $profile_id);
+    if ($ok != 0) {
+        return "Le film à été ajouté aux favoris";
+    } else {
+        return "Erreur, le film n'a pas été ajouté aux favoris";
+    }
+}
+
+function delFavoriteController(){
+    $movie_id = $_REQUEST['movie_id'];
+    $profile_id = $_REQUEST['profile_id'];
+    $ok = delFavorite($movie_id, $profile_id);
+    if ($ok != 0) {
+        return "Le film à été supprimé des favoris";
+    } else {
+        return "Erreur, le film n'a pas été supprimé des favoris";
+    }
+}
+
+function getFavoriteController(){
+    $id_profil = $_REQUEST['profile_id'];
+    $favoris = getFavorite($id_profil);
+    return $favoris;
+}
