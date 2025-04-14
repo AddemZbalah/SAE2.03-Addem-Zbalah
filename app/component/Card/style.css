@@ -9,6 +9,7 @@ body{
 
 
 .card__container{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center; 
@@ -102,4 +103,29 @@ body{
 .card__favorite-btn:active .favoris-icon {
     scale: 0.8;
     transition: all 0.3s ease-in-out;
+}
+
+
+.card__delfavorite-btn {
+    position: absolute;
+    top: 10px;
+    left: 45px;
+    background: none;
+    border: solid 1px white;
+    padding: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.card__delfavorite-btn img {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+.card__delete-btn.show {
+    display: block;
+}
+
+.hidden {
+    display: none;
 }

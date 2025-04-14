@@ -69,12 +69,14 @@ C.addFavorite = async function(movieId) {
     const result = await DataMovie.addFavorite(movieId);
     const favoriteBtn = document.querySelector(`.card[id="${movieId}"] .favoris-icon`);
     
-    if (result === "Film ajouté aux favoris") {
+    if (result == "Film ajouté aux favoris") {
         favoriteBtn.src = "../server/images/star_active.svg";
     }
     
     console.log(result);
 };
+
+
 
 C.handleFavorite = async function(movieId) {
     const currentUser = DataProfile.getCurrentUser();
@@ -92,6 +94,116 @@ C.handleFavorite = async function(movieId) {
     }
     
     console.log(result);
+};
+
+// C.handleFavorite = async function(movieId) {
+//     const currentUser = DataProfile.getCurrentUser();
+//     if (!currentUser) {
+//         alert("Veuillez sélectionner un profil");
+//         return;
+//     }
+
+//     // Vérifie d'abord si le film est dans les favoris
+//     const favorites = await DataMovie.getFavorites();
+//     const isFavorite = favorites.some(movie => movie.id == movieId);
+    
+//     let result;
+//     if (isFavorite) {
+//         // Si c'est un favori, on le supprime
+//         result = await DataMovie.deleteFavorite(movieId);
+//         if (result) {
+//             const favoriteBtn = document.querySelector(`[data-movie-id="${movieId}"] .favoris-icon`);
+//             if (favoriteBtn) {
+//                 favoriteBtn.src = "../server/images/star_notactive.svg";
+//             }
+//             alert("Film retiré des favoris");
+//         }
+//     } else {
+//         // Si ce n'est pas un favori, on l'ajoute
+//         result = await DataMovie.addFavorite(movieId);
+//         if (result == "Film ajouté aux favoris") {
+//             const favoriteBtn = document.querySelector(`[data-movie-id="${movieId}"] .favoris-icon`);
+//             if (favoriteBtn) {
+//                 favoriteBtn.src = "../server/images/star_active.svg";
+//             }
+//             alert("Film ajouté aux favoris");
+//         }
+//     }
+    
+//     console.log(result);
+// };
+
+// C.handleDeleteFavorite = async function(movieId) {
+//     const currentUser = DataProfile.getCurrentUser();
+//     if (!currentUser) {
+//         alert("Veuillez sélectionner un profil");
+//         return;
+//     }
+
+//     // Vérifie d'abord si le film est dans les favoris
+//     const favorites = await DataMovie.getFavorites();
+//     const isFavorite = favorites.some(movie => movie.id == movieId);
+
+//     if (!isFavorite) {
+//         alert("Ce film n'est pas dans vos favoris");
+//         return;
+//     }
+
+//     // Si le film est un favori, on le supprime
+//     const result = await DataMovie.deleteFavorite(movieId);
+    
+//     if (result) {
+//         alert("Film supprimé des favoris");
+//         // Mise à jour visuelle de l'icône
+//         const favoriteBtn = document.querySelector(`[data-movie-id="${movieId}"] .favoris-icon`);
+//         if (favoriteBtn) {
+//             favoriteBtn.src = "../server/images/star_notactive.svg";
+//         }
+//     } else {
+//         alert("Erreur lors de la suppression du favori");
+//     }
+// };
+
+C.handleFavorite = async function(movieId) {
+    const currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        alert("Veuillez sélectionner un profil");
+        return;
+    }
+
+    // Ajoute aux favoris
+    const result = await DataMovie.addFavorite(movieId);
+    
+    // Change l'icône
+    const card = document.getElementById(movieId);
+    const starBtn = card.querySelector('.card__favorite-btn');
+    const deleteBtn = card.querySelector('.card__delete-btn');
+    
+    starBtn.classList.add('hidden');
+    deleteBtn.classList.remove('hidden');
+    
+    alert("Film ajouté aux favoris");
+};
+
+C.handleDeleteFavorite = async function(movieId) {
+    const currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        alert("Veuillez sélectionner un profil");
+        return;
+    }
+
+    // Supprime des favoris
+    const result = await DataMovie.deleteFavorite(movieId);
+    
+    // Change l'icône
+    const card = document.getElementById(movieId);
+    const starBtn = card.querySelector('.card__favorite-btn');
+    const deleteBtn = card.querySelector('.card__delete-btn');
+    
+    deleteBtn.classList.add('hidden');
+    starBtn.classList.remove('hidden');
+    
+    alert("Film retiré des favoris");
 };
 
 C.handleProfileChange = function(profileId) {

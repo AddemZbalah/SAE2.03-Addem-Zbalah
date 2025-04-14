@@ -95,11 +95,36 @@ DataMovie.addFavorite = async function(movieId) {
         return "Veuillez sélectionner un profil";
     }
 
-    let answer = await fetch(HOST_URL + "/server/script.php?todo=addFavorite&movie_id=" + movieId + "&profile_id=" + currentUser.id);
-    console.log(answer);
+    try {
+        // Correction du chemin (suppression du double slash)
+        let answer = await fetch(HOST_URL + "/server/script.php?todo=addfavorite&movie_id=" + movieId + "&profile_id=" + currentUser.id);
+        return await answer.text();
+    } catch (error) {
+        console.error("Erreur:", error);
+        return "Erreur lors de l'ajout aux favoris";
+    }
+};
+
+DataMovie.deleteFavorite = async function(movieId) {
+    let currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        return "Veuillez sélectionner un profil";
+    }
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=delfavorite&movie_id=" + movieId + "&profile_id=" + currentUser.id);
     let data = await answer.json();
     return data;
-};
+}
+
+DataMovie.getFavorites = async function() {
+    let currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        return "Veuillez sélectionner un profil";
+    }
+    // Changement de getFavorites à getfavorite pour correspondre au serveur
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=getfavorite&profile_id=" + currentUser.id);
+    let data = await answer.json();
+    return data;
+}
 
     // DataMovie.addfavorite = async function (movie,profile) {
     //     let config = {

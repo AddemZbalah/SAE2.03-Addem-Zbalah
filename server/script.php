@@ -83,12 +83,17 @@ if ( isset($_REQUEST['todo']) ){
       $data = addNewProfileController();
       break;
 
-    case 'addFavorite':
-      $data = addFavoriteController();
-      break;
-      
+
     case 'addfavorite':
       $data = addFavoriteController();
+      break;
+
+    case 'getfavorite':
+      $data = getFavoriteController();
+      break;
+
+    case 'delfavorite':
+      $data = delFavoriteController();
       break;
 
     // case 'getmovieorderbyage':
