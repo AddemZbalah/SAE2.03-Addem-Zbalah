@@ -6,13 +6,18 @@ let Card = {};
 
 Card.format = function(card){
     let html= template;
-    html = html.replace('<div class="card', `<div class="card" onclick="C.handlerDetail(${card.id})"`);
+    // html = html.replace('<div class="card', `<div class="card" onclick="C.handlerDetail(${card.id})"`);
     // html = html.replace("{{fav_btn}}", "../server/images/favorite.png");
-    html = html.replace('{{title}}', card.name);
-    html = html.replace('{{img}}', card.image);
-    html = html.replace('{{id}}', card.id);
+    while (html.includes('{{id}}')) {
+        html = html.replace('{{id}}', card.id);
+    }
     html = html.replace('{{id_del_movie}}', card.id);
     html = html.replace('{{id_movie}}', card.id);
+    html = html.replace('{{title}}', card.name);
+    html = html.replace('{{img}}', card.image);
+
+    // ... reste du code ...
+
 
     if (card.isFavorite) {
         html = html.replace("star_notactive.svg", "star_active.svg");

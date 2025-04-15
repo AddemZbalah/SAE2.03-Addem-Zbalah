@@ -28,21 +28,12 @@
         <input required type="number" class="form__input" name="length" placeholder="Durée (minutes)">
         <select required class="form__input" name="id_category">
             <option value="">Sélectionner une catégorie</option>
-            <option value="1">Action</option>
-            <option value="2">Comédie</option>
-            <option value="3">Drame</option>
-            <option value="4">Science-fiction</option>
-            <option value="5">Animation</option>
-            <option value="6">Thriller</option>
-            <option value="7">Horreur</option>
-            <option value="8">Aventure</option>
-            <option value="9">Fantaisie</option>
-            <option value="10">Documentaire</option>
+            <!-- ... options ... -->
         </select>
         <input required type="number" class="form__input" name="min_age" placeholder="Age minimum">
         <input required type="text" class="form__input" name="image" placeholder="Nom de l'image">
         <input required type="text" class="form__input" name="trailer" placeholder="Lien du trailer">
         <textarea required class="form__textarea" name="description" placeholder="Description du film"></textarea>
-        <button required class="form__btn" onclick="{{handlerAddMovie}}" type="button" value="Ajouter un film" name="todo">Ajouter</button>
+        <button class="form__btn" onclick="{{handlerAddMovie}}" type="button" value="Ajouter un film" name="todo">Ajouter</button>
     </form>
 </div>

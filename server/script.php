@@ -96,6 +96,10 @@ if ( isset($_REQUEST['todo']) ){
       $data = delFavoriteController();
       break;
 
+    case 'getrecommended':
+      $data = getRecommendedMoviesController();
+      break;
+
     // case 'getmovieorderbyage':
     //   $data= getMoviesOrderByAgeController();
     //   break;

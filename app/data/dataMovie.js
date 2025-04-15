@@ -126,6 +126,17 @@ DataMovie.getFavorites = async function() {
     return data;
 }
 
+DataMovie.getRecommendedMovies = async function() {
+    let currentUser = DataProfile.getCurrentUser();
+    if (!currentUser) {
+        return "Veuillez sélectionner un profil";
+    }
+    
+    let answer = await fetch(HOST_URL + "/server/script.php?todo=getrecommended&min_age=" + currentUser.minAge);
+    let data = await answer.json();
+    return data;
+}
+
     // DataMovie.addfavorite = async function (movie,profile) {
     //     let config = {
     //         method: "POST",

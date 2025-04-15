@@ -222,3 +222,19 @@ function getFavoriteController(){
     $favoris = getFavorites($id_profil);
     return $favoris;
 }
+
+function getRecommendedMoviesController() {
+    $min_age = $_REQUEST['min_age'];
+    
+    if (!isset($min_age)) {
+        return "L'âge minimum est requis";
+    }
+    
+    $movies = getRecommendedMovies($min_age);
+    
+    if ($movies) {
+        return $movies;
+    } else {
+        return "Aucun film recommandé trouvé";
+    }
+}

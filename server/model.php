@@ -261,3 +261,27 @@ function getFavorites($profile_id) {
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
     return $res; // Retourne les résultats
 }
+
+function getRecommendedMovies($min_age) {
+    // Connexion à la base de données
+    $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
+    
+    // Requête SQL pour récupérer les films recommandés
+    $sql = "SELECT Movie.*, Category.name AS category 
+            FROM Movie 
+            JOIN Category ON Movie.id_category = Category.id 
+            WHERE Movie.min_age <= :min_age AND Movie.id % 2 = 0
+            ORDER BY Movie.year DESC ";
+            
+    // Prépare la requête SQL
+    $stmt = $cnx->prepare($sql);
+    
+    // Lie le paramètre d'âge
+    $stmt->bindParam(':min_age', $min_age);
+    
+    // Exécute la requête SQL
+    $stmt->execute();
+    
+    // Retourne les résultats
+    return $stmt->fetchAll(PDO::FETCH_OBJ);
+}
