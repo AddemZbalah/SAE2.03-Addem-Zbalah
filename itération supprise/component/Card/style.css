@@ -21,7 +21,7 @@ body{
     
     /* background-size: contain;
     background-repeat: no-repeat; */
-    background:linear-gradient(to top , rgba(0, 0, 0, 0.918) 25%, rgba(0, 0, 0, 0) 90%), var(--bg-card);
+    background: var(--bg-card);
     /* background-image: url(../Card/assets/spiderman.jpg); */
     background-size: cover;
     /* object-fit: ; */
@@ -31,7 +31,7 @@ body{
 }
 
 .card__container:hover {
-    transform: scale(1.02);
+    transform: scale(1.1);
     transition: ease-in-out 0.3s;
 }
 

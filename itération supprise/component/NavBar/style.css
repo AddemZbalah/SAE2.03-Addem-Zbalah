@@ -225,20 +225,25 @@
 
 /* Form input */
 .navbar__form__input {
-  background-color: transparent;
+  background-color: var(--color-white);
   border: 2px solid var(--color-white);
-  border-radius: 4px;
-  color: var(--color-white);
+  border-radius: 2px;
+  color: var(--color-blue-light);
   padding: 0.5rem 1rem;
   font-family: var(--font-primary);
   cursor: pointer;
   min-width: 150px;
 }
 
+
 .navbar__form__input option {
   background-color: var(--color-blue-light);
   color: var(--color-white);
   padding: 0.5rem;
+}
+
+.navbar__form__input select{
+  border: none;
 }
 
 .hidden {

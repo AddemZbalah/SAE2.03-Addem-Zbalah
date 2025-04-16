@@ -2,7 +2,7 @@
 .movie-category {
     padding: 2rem;
     margin-top: 1rem;
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    background: var(--color-dark);
 }
 
 
@@ -32,17 +32,17 @@
 
 
 .movie-category__title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #00fff5;
+    font-size: normal;
+    font-weight: bold;
+    color: var(--color-white);
+    font-family: 'metropolis', sans-serif;
     margin-bottom: 2rem;
-    text-transform: uppercase;
-    letter-spacing: 0.2rem;
+    letter-spacing: normal;
     position: relative;
     padding-left: 1rem;
 }
 
-.movie-category__title::before {
+/* .movie-category__title::before {
     content: '';
     position: absolute;
     left: 0;
@@ -52,7 +52,7 @@
     height: 80%;
     background: #00fff5;
     border-radius: 0.2rem;
-}
+} */
 
 .movie-category__movies {
     display: grid;
