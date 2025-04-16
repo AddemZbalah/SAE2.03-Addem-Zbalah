@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+body{
+    font-family: 'Bebas Neue' ,sans-serif;
+    width: 100%;
+    height: 100vh;
+}
+
+
+
+.card__container{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    height: 20rem;
+    width: 15rem;
+    /* border-radius: 10px; */
+    
+    /* background-size: contain;
+    background-repeat: no-repeat; */
+    background:linear-gradient(to top , rgba(0, 0, 0, 0.918) 25%, rgba(0, 0, 0, 0) 90%), var(--bg-card);
+    /* background-image: url(../Card/assets/spiderman.jpg); */
+    background-size: cover;
+    /* object-fit: ; */
+    background-repeat: no-repeat;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+
+}
+
+.card__container:hover {
+    transform: scale(1.02);
+    transition: ease-in-out 0.3s;
+}
+
+.card__title{
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    text-transform: uppercase;
+    position: relative;
+    transform: translateY(7rem);
+    font-size: 1.7rem;
+}
+
+
+.card{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    /* width: 100%; */
+    align-items: center;
+    justify-content: center;
+}
+
+.favoris-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.favoris-icon:hover{
+    scale: 1.2;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.favoris-icon:active{
+    scale: 0.8;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+
+.card__favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.card__favorite-btn:hover .favoris-icon {
+    scale: 1.2;
+    transition: all 0.3s ease-in-out;
+}
+
+.card__favorite-btn:active .favoris-icon {
+    scale: 0.8;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.card__delfavorite-btn {
+    position: absolute;
+    top: 10px;
+    left: 45px;
+    background: none;
+    border: solid 1px white;
+    padding: 0;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.card__delfavorite-btn img {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+.card__delete-btn.show {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}

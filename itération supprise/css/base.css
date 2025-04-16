@@ -1,0 +1,22 @@
+@layer reset, variables, components, utilities;
+
+@import "./reset.css" layer(reset);
+@import "./variables.css" layer(variables);
+@import "./utilities.css" layer(utilities);
+
+@import "../component/NavBar/style.css" layer(components);
+@import "../component/Card/style.css" layer(components);
+@import "../component/Desc_card/style.css" layer(components);
+@import "../component/MovieCategory/style.css" layer(components);
+
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('./font/metropolis.otf') format('opentype');
+}
+
+.movie-category{
+    width: 100%;
+    background-color: black;
+    color: white;
+}

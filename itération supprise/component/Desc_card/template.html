@@ -1,0 +1,25 @@
+
+
+    <section class="desc-card" style="--bg-card:url('../../../server/images/{{img}}')" alt="images">
+        <div class="desc-card__details-container">
+            <h1 class="desc-card__title">{{title}}</h1>
+            <p class="desc-card__description">{{description}}</p>
+            <div class="desc-card__details">
+                <ul class="desc-card__detailsul">
+                    <li class="desc-card__detailsli">{{realisateur}}</li>
+                    <li class="desc-card__detailsli">{{duree}}min</li>
+                    <li class="desc-card__detailsli">{{date}}</li>
+                    <li class="desc-card__detailsli"><span>+{{age}}</span></li>
+                    <li class="desc-card__detailsli"><span>{{categorie}}</span></li>
+                </ul>
+            </div>
+            <iframe
+                id="desc-card__iframe"
+                class="desc-card__iframe"
+                width="500"
+                height="300"
+                src="{{trailer}}">
+            </iframe>
+        </div>
+    </section>
+    
