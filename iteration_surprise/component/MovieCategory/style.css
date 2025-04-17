@@ -67,6 +67,14 @@
     perspective: 1000px;
 }
 
+.movie-category__banner {
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    margin: 2rem auto;
+    object-fit: contain;
+}
 
 
 .movie-category__card:hover {
@@ -99,6 +107,8 @@
     transform-origin: bottom;
     transition: all 0.3s ease;
 }
+
+
 
 .movie-category__card:hover .movie-category__name {
     background: linear-gradient(

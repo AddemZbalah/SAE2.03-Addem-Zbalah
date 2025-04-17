@@ -1,10 +1,10 @@
 <div class="card" id="{{id}}" onclick="C.handlerDetail({{id}});">
     <div class='card__container' style="--bg-card:url('../../../server/images/{{img}}')">
         <button type="button" class="card__delfavorite-btn" onclick="event.stopPropagation(); C.handleDeleteFavorite({{id_del_movie}})">
-            <img src="../server/images/bx-x.svg" class="favoris-icon" alt="fav-icon"/>
+            <img src="../server/images/bx-x.svg" class="card__favoris-icon" alt="fav-icon"/>
         </button>
         <button type="button" class="card__favorite-btn" onclick="event.stopPropagation(); C.handleFavorite({{id_movie}})">
-            <img src="../server/images/star_notactive.svg" class="favoris-icon" alt="fav-icon"/>
+            <img src="../server/images/star_notactive.svg" class="card__favoris-icon" alt="fav-icon"/>
         </button>
         <!-- <p class="card__title">{{title}}</p> -->
     </div>

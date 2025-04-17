@@ -1,0 +1,93 @@
+@layer reset, variables, components, utilities;
+
+@import "./reset.css" layer(reset);
+@import "./variables.css" layer(variables);
+@import "./utilities.css" layer(utilities);
+
+@import "../component/NavBar/style.css" layer(components);
+@import "../component/Card/style.css" layer(components);
+@import "../component/Desc_card/style.css" layer(components);
+@import "../component/MovieCategory/style.css" layer(components);
+@import "../component/footer/style.css" layer(components);
+@import "../component/Hero/style.css" layer(components);
+@import "../component/brands/style.css" layer(components);
+
+
+@font-face {
+    font-family: 'metropolis';
+    src: url('./font/metropolis.otf') format('opentype');
+}
+
+body{
+    background-color: var(--color-dark);
+    font-family: 'metropolis', sans-serif;
+}
+
+.movie-category{
+    width: 100%;
+    background-color: var(--color-dark);
+    color: white;
+}
+
+#content{
+    margin: 0 auto;
+}
+
+footer{
+    font-family: "metropolis", sans-serif;
+}
+
+.footer {
+    display: flex;
+    position: relative;
+    margin-top: auto;
+    width: 100%;
+    padding: 4rem 2rem 2rem;
+    color: var(--color-white);
+    background-color: var(--color-dark);
+}
+
+.footer__container {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer__content {
+    display: flex;
+    justify-content: space-around;
+    gap: 4rem;
+    margin-bottom: 2rem;
+}
+
+.footer__list {
+    display: block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer__item {
+    margin-bottom: 1rem;
+}
+
+.footer__link {
+    display: inline-block;
+    position: relative;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+.footer__copyright {
+    display: block;
+    padding-top: 2rem;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+

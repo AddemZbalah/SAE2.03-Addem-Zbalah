@@ -1,0 +1,11 @@
+.landing__links-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    height: 20rem;
+    width: 20rem;
+    /* background-color: black; */
+    color: white;
+}

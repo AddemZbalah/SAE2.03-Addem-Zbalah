@@ -9,11 +9,35 @@
 
   <body>
     <header id="header"></header>
-
     <section id="content">
-      <div id="movie-category" class="movie-category"></div>
-      <!-- <div id="card" class="card"></div> -->
+        <div id="hero"></div>
+        <div id="brands"></div>
+        <div id="movie-category" class="movie-category"></div>
+        <!-- <div id="card" class="card"></div> -->
     </section>
+    <footer id="footer" class="footer">
+        <div class="footer__container">
+            <div class="footer__content">
+                <ul class="footer__list">
+                    <li class="footer__item"><a href="#" class="footer__link">À propos</a></li>
+                    <li class="footer__item"><a href="#" class="footer__link">Aide et FAQ</a></li>
+                    <li class="footer__item"><a href="#" class="footer__link">Termes et Conditions</a></li>
+                    <li class="footer__item"><a href="#" class="footer__link">Vie privée</a></li>
+                    <li class="footer__item"><a href="#" class="footer__link">Accessibilité</a></li>
+                </ul>
+                <ul class="footer__list">
+                    <li class="footer__item"><a href="#" class="footer__link">Registre Publicitaire</a></li>
+                    <li class="footer__item"><a href="#" class="footer__link">Publicité</a></li>
+                    <li class="footer__item"><a href="#" class="footer__link">Légal</a></li>
+                    <li class="footer__item"><a href="#" class="footer__link">Infolettre</a></li>
+                    <li class="footer__item"><a href="#" class="footer__link">Paramètres des témoins</a></li>
+                </ul>
+            </div>
+            <div class="footer__copyright">
+                <p>&copy; 2024 NOOVO. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- <section id="card" class="card"></section> -->
 
@@ -25,6 +49,9 @@
       import { MovieCategory } from "./component/MovieCategory/script.js";
       import { DataProfile } from "./data/dataProfile.js";
       import { Profile } from "./component/Profile/script.js";
+      import { Hero } from "./component/Hero/script.js";
+      import { Brands } from "./component/brands/script.js";
+
 
       
 
@@ -42,9 +69,16 @@
 
       C.handlerHome = function() {
           let content = document.querySelector("#content");
+          let hero = document.querySelector("#hero");
+          if (hero == null || hero == "") {
+                content.innerHTML = "<div id='hero'></div>";
+            }        
+            V.renderHero();
+            V.renderBrands();
+        
     // On remet la structure de base si elle n'existe plus
           if (!document.querySelector("#movie-category")) {
-              content.innerHTML = `<div id="movie-category" class="movie-category"></div>`;
+              content.innerHTML += `<div id="movie-category" class="movie-category"></div>`;
           } else {
               document.querySelector("#movie-category").style.display = "";
               document.querySelector("#movie-category").innerHTML = "";
@@ -54,6 +88,8 @@
         if (currentUser && currentUser.minAge) {
             minAge = currentUser.minAge;
         }
+
+        
         C.getMovieCategories(minAge);
     };
 
@@ -272,12 +308,7 @@ C.handleProfileChange = function(profileId) {
     // Charge les films pour son âge
     C.getMovieCategories(user.minAge);
 };
-      C.start = async function () {
-          let profileOptions = await C.getProfiles();
-          V.renderNavBar("C.handlerAbout()", profileOptions);
-    // Au démarrage, on passe 0 pour voir tous les films
-          C.handlerHome();
-      };
+
 
       C.getMovie = async function(){
       let data = await DataMovie.request();
@@ -409,6 +440,7 @@ C.showFavorites = async function() {
         return;
     }
 
+
     // Récupère les favoris de l'utilisateur
     const favorites = await DataMovie.getFavorites();
     
@@ -468,7 +500,6 @@ C.showFavorites = async function() {
       V.renderMovieDetails = function (movie) {
           let content = document.querySelector("#content");
           content.innerHTML = Card_desc.format(movie);
-    // (ne mets pas le bouton ici)
       };
 
       V.renderMovieCategories = function (html) {
@@ -476,7 +507,7 @@ C.showFavorites = async function() {
             let movieCategory = document.querySelector("#movie-category");
             if (!movieCategory) {
                 let content = document.querySelector("#content");
-                content.innerHTML = '<div id="movie-category" class="movie-category"></div>';
+                content.innerHTML += '<div id="movie-category" class="movie-category"></div>';
                 movieCategory = document.querySelector("#movie-category");
             }
     // Maintenant on peut mettre le HTML dedans
@@ -500,6 +531,36 @@ V.renderRecommendedMovies = function(movies) {
     let content = document.querySelector("#movie-category");
     content.innerHTML = html + Card.formatMany(movies) + content.innerHTML;
 };
+
+        V.renderHero = function () {
+            let hero = document.querySelector("#hero");
+            if (hero== null || hero == "") {
+                let content = document.querySelector("#content");
+                content.innerHTML += '<div id="hero"></div>';
+                hero = document.querySelector("#hero");
+            }
+            hero.innerHTML = Hero.format();
+        };
+
+        V.renderBrands = function () {
+            let brands = document.querySelector("#brands");
+            if (brands == null || brands == "") {
+                let content = document.querySelector("#content");
+                content.innerHTML += '<div id="brands"></div>';
+                brands = document.querySelector("#brands");
+            }
+            brands.innerHTML = Brands.format();
+        };
+        // V.renderHero = function () {
+        //     let hero = document.querySelector("#hero");
+        //     if (hero== null || hero == "") {
+        //         let content = document.querySelector("#content");
+        //         content.innerHTML += '<div id="hero"></div>';
+        //         hero = document.querySelector("#hero");
+        //     }
+        //     hero.innerHTML = Hero.format();
+        // };
+
 
 
 

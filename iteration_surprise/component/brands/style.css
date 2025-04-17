@@ -1,0 +1,36 @@
+.brands {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.brands__logo {
+    display: block;
+    width: 150px;
+    height: 100px;
+    padding: 1rem;
+    object-fit: contain;
+    background-color: var(--color-dark);
+    border: 2px solid var(--color-white);
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.brands__logo:hover {
+    transform: scale(1.05);
+    background-color: var(--color-blue-light);
+}
+
+@media screen and (max-width: 768px) {
+    .brands {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .brands__logo {
+        width: 120px;
+        height: 120px;
+    }
+}

@@ -1,4 +1,6 @@
+
 import { Card } from "../Card/script.js";
+import { DataProfile } from "../../data/dataProfile.js";
 import { DataMovie } from "../../data/dataMovie.js";
 
 let templateFile = await fetch('./component/MovieCategory/template.html');
@@ -6,12 +8,23 @@ let template = await templateFile.text();
 
 let MovieCategory = {};
 
+
+
 MovieCategory.format = function(category, movies) {
     let html = template;
+    let hideClass = '';
+
+    if (DataProfile.getCurrentUser()) {
+        hideClass = 'hidden';
+    }
+
     html = html.replace("{{title}}", category);
+    
 
     let html2 = Card.formatMany(movies);
     html = html.replace("{{movies}}", html2);
+    html = html.replace("{{hideClass}}", hideClass);
+
 
     if (!movies || movies.length === 0) {
         return ""; // Ne retourne rien si pas de films
