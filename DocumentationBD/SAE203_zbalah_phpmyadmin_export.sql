@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1deb5ubuntu1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : ven. 18 avr. 2025 à 13:14
--- Version du serveur : 10.11.11-MariaDB-0+deb12u1
--- Version de PHP : 8.3.19
+-- Hôte : localhost:3306
+-- Généré le : ven. 18 avr. 2025 à 17:14
+-- Version du serveur : 8.0.41-0ubuntu0.22.04.1
+-- Version de PHP : 8.1.2-1ubuntu2.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `zbalah3`
+-- Base de données : `SAE203`
 --
 
 -- --------------------------------------------------------
@@ -28,9 +28,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Category` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `Category`
@@ -55,8 +55,8 @@ INSERT INTO `Category` (`id`, `name`) VALUES
 --
 
 CREATE TABLE `Favorites` (
-  `profile_id` int(11) NOT NULL,
-  `movie_id` int(11) NOT NULL
+  `profile_id` int NOT NULL,
+  `movie_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -64,10 +64,9 @@ CREATE TABLE `Favorites` (
 --
 
 INSERT INTO `Favorites` (`profile_id`, `movie_id`) VALUES
+(5, 12),
 (5, 52),
-(5, 59),
-(5, 60),
-(5, 62);
+(1, 56);
 
 -- --------------------------------------------------------
 
@@ -76,18 +75,18 @@ INSERT INTO `Favorites` (`profile_id`, `movie_id`) VALUES
 --
 
 CREATE TABLE `Movie` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(255) NOT NULL,
-  `year` int(11) DEFAULT NULL,
-  `length` int(11) DEFAULT NULL,
-  `description` text DEFAULT NULL,
+  `year` int DEFAULT NULL,
+  `length` int DEFAULT NULL,
+  `description` text,
   `director` varchar(255) DEFAULT NULL,
-  `id_category` int(11) DEFAULT NULL,
+  `id_category` int DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `trailer` varchar(255) DEFAULT NULL,
-  `min_age` int(11) DEFAULT NULL,
-  `recommandes` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+  `min_age` int DEFAULT NULL,
+  `recommandes` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `Movie`
@@ -118,10 +117,10 @@ INSERT INTO `Movie` (`id`, `name`, `year`, `length`, `description`, `director`, 
 --
 
 CREATE TABLE `Profile` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `avatar` varchar(255) DEFAULT NULL,
-  `min_age` int(2) NOT NULL
+  `id` int NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `avatar` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `min_age` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -132,7 +131,11 @@ INSERT INTO `Profile` (`id`, `name`, `avatar`, `min_age`) VALUES
 (1, 'addemsan', 'goku.jpg', 3),
 (4, 'addemleneuil', 'goku.jpg', 5),
 (5, 'arthurtetedeneuil', 'barbie.jpg', 55),
-(6, 'lev', 'lev.jpg', 7);
+(6, 'bzbzbz', 'default-avatar.png', 14),
+(7, 'tuconnais', 'goku.png', 15),
+(8, 'tuconnais', 'goku.png', 15),
+(9, 'bzbzbz', 'default-avatar.png', 14),
+(10, 'wi', 'san.jpg', 15);
 
 --
 -- Index pour les tables déchargées
@@ -172,19 +175,19 @@ ALTER TABLE `Profile`
 -- AUTO_INCREMENT pour la table `Category`
 --
 ALTER TABLE `Category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `Movie`
 --
 ALTER TABLE `Movie`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT pour la table `Profile`
 --
 ALTER TABLE `Profile`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Contraintes pour les tables déchargées
