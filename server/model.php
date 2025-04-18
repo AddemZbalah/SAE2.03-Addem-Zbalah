@@ -32,30 +32,28 @@ define("DBPWD", "zbalah3");
  * @return array Un tableau d'objets contenant l'entrée, le plat principal et le dessert pour le jour spécifié.
  */
 function getMovie(){
-    // Connexion à la base de données
+
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le menu avec des paramètres
+
     $sql = "select * from Movie";
-    // Prépare la requête SQL
+
     $stmt = $cnx->prepare($sql);
-    // Lie le paramètre à la valeur
-    // $stmt->bindParam(':category', $category);
-    // $stmt->bindParam(':title', $title);
-    // Exécute la requête SQL
+   
+
     $stmt->execute();
-    // Récupère les résultats de la requête sous forme d'objets
+   
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+    return $res; 
 }
 
 function addMovie($name, $year, $length, $description, $director, $id_category, $image, $trailer, $min_age){
-    // Connexion à la base de données
+    
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le menu avec des paramètres
+
     $sql = "INSERT INTO Movie (name,year,length,description,director,id_category,image,trailer,min_age) VALUES (:name,:year,:length,:description,:director,:id_category,:image,:trailer,:min_age)";
-    // Prépare la requête SQL
+   
     $stmt = $cnx->prepare($sql);
-    // Lie le paramètre à la valeur
+    
     $stmt->bindParam(':name', $name);
     $stmt->bindParam(':year', $year);
     $stmt->bindParam(':length', $length);
@@ -65,13 +63,11 @@ function addMovie($name, $year, $length, $description, $director, $id_category, 
     $stmt->bindParam(':image', $image);
     $stmt->bindParam(':trailer', $trailer);
     $stmt->bindParam(':min_age', $min_age);
-    // $stmt->bindParam(':category', $category);
-    // $stmt->bindParam(':title', $title);
-    // Exécute la requête SQL
+   
     $stmt->execute();
-    // Récupère les résultats de la requête sous forme d'objets
+    
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+    return $res; 
 }
 
 function getMovieDetail($id){
@@ -90,27 +86,25 @@ function getMovieDetail($id){
 }
 
 function getCategory(){
-    // Connexion à la base de données
+    
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer le menu avec des paramètres
+    
     $sql = "select * from Category";
-    // Prépare la requête SQL
+    
     $stmt = $cnx->prepare($sql);
-    // Lie le paramètre à la valeur
-    // $stmt->bindParam(':category', $category);
-    // $stmt->bindParam(':title', $title);
-    // Exécute la requête SQL
+    
+    
     $stmt->execute();
-    // Récupère les résultats de la requête sous forme d'objets
+    
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+    return $res; 
 }
 
 
 function getMovieCategories($category, $age = null){
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     
-    // Si age n'est pas défini, sélectionner tous les films de la catégorie
+    
     if ($age == null) {
         $sql = "SELECT Movie.*, Category.name AS category 
                 FROM Movie 
@@ -120,7 +114,7 @@ function getMovieCategories($category, $age = null){
         $stmt = $cnx->prepare($sql);
         $stmt->bindParam(':category', $category);
     } else {
-        // Sinon, filtrer par âge
+        
         $sql = "SELECT Movie.*, Category.name AS category 
                 FROM Movie 
                 JOIN Category ON Movie.id_category = Category.id 
@@ -174,23 +168,23 @@ function getAllUserProfiles(){
 // }
 
 function addNewProfile($Nom, $Age, $file, $id) {
-    // Connexion à la base de données
+    
     $cnx = new PDO("mysql:host=" . HOST . ";dbname=" . DBNAME, DBLOGIN, DBPWD);
 
-    // Requête SQL d'insertion du profil
+    
     $sql = "UPDATE Profile SET name = :name, min_age = :min_age, avatar = :avatar WHERE id = :id;";
     $stmt = $cnx->prepare($sql);
 
-    // Lie les paramètres
+    
     $stmt->bindParam(':name', $Nom);
     $stmt->bindParam(':min_age', $Age);
     $stmt->bindParam(':avatar', $file);
     $stmt->bindParam(':id', $id);
 
-    // Exécute la requête SQL
+    
     $stmt->execute();
 
-    // Retourne le nombre de lignes affectées
+    
     return $stmt->rowCount();
 }
 
@@ -198,7 +192,7 @@ function addNewProfile($Nom, $Age, $file, $id) {
 // function toggleFavorite($movieid, $profileid) {
 //     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     
-//         // Essaie d'abord d'insérer
+
 //         $sql = "INSERT INTO Favorites (profile.id, movie.id) VALUES (:profile.id, :movie.id)";
 //         $stmt = $cnx->prepare($sql);
 //         $stmt->bindParam(':profile.id', $profileid);
@@ -210,7 +204,7 @@ function addNewProfile($Nom, $Age, $file, $id) {
 function addFavorite($movie_id, $profile_id) {
     try {
         $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-        // Vérifie si déjà favori
+        
         $check = $cnx->prepare("SELECT * FROM Favorites WHERE movie_id = :movie_id AND profile_id = :profile_id");
         $check->execute(['movie_id' => $movie_id, 'profile_id' => $profile_id]);
         if ($check->rowCount() > 0) {
@@ -228,60 +222,60 @@ function addFavorite($movie_id, $profile_id) {
 }
 
 function delFavorite($movie_id, $profile_id) {
-    // Connexion à la base de données
+    
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL d'insertion du film
+    
     $sql = "DELETE FROM Favorites WHERE movie_id = :movie_id AND profile_id = :profile_id";
-    // Prépare la requête SQL
+    
     $stmt = $cnx->prepare($sql);
-    // Lie les paramètres
+    
     $stmt->bindParam(':movie_id', $movie_id);
     $stmt->bindParam(':profile_id', $profile_id);
-    // Exécute la requête SQL
+    
     $stmt->execute();
-    // Retourne le nombre de lignes affectées
+    
     return $stmt->rowCount();
 }
 
 function getFavorites($profile_id) {
-    // Connexion à la base de données
+    
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
-    // Requête SQL pour récupérer les films favoris
+    
     $sql = "SELECT Movie.*, Favorites.profile_id 
             FROM Movie 
             JOIN Favorites ON Movie.id = Favorites.movie_id 
             WHERE Favorites.profile_id = :profile_id";
-    // Prépare la requête SQL
+    
     $stmt = $cnx->prepare($sql);
-    // Lie le paramètre
+    
     $stmt->bindParam(':profile_id', $profile_id);
-    // Exécute la requête SQL
+    
     $stmt->execute();
-    // Récupère les résultats de la requête sous forme d'objets
+    
     $res = $stmt->fetchAll(PDO::FETCH_OBJ);
-    return $res; // Retourne les résultats
+    return $res; 
 }
 
 function getRecommendedMovies($min_age) {
-    // Connexion à la base de données
+    
     $cnx = new PDO("mysql:host=".HOST.";dbname=".DBNAME, DBLOGIN, DBPWD);
     
-    // Requête SQL pour récupérer les films recommandés
+    
     $sql = "SELECT Movie.*, Category.name AS category 
             FROM Movie 
             JOIN Category ON Movie.id_category = Category.id 
             WHERE Movie.min_age <= :min_age AND Movie.id % 2 = 0
             ORDER BY Movie.year DESC ";
             
-    // Prépare la requête SQL
+    
     $stmt = $cnx->prepare($sql);
     
-    // Lie le paramètre d'âge
+    
     $stmt->bindParam(':min_age', $min_age);
     
-    // Exécute la requête SQL
+    
     $stmt->execute();
     
-    // Retourne les résultats
+    
     return $stmt->fetchAll(PDO::FETCH_OBJ);
 }

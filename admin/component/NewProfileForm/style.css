@@ -12,7 +12,6 @@
     font-size: 2rem;
     text-align: center;
     margin-bottom: 2rem;
-    /* text-transform: uppercase; */
     letter-spacing: 0.2rem;
     font-family: var(--ff-Bebas);
 }
@@ -71,7 +70,6 @@
     }
 }
 
-/* Animation pour les messages d'erreur/succès */
 .addNewProfile__message {
     padding: 1rem;
     margin-top: 1rem;

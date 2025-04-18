@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title>SAE2.03 ADMIN</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/base.css" />
+  </head>
+  <body>
+    <section id="content">
+      <section id="log"></section>
+
+    </section>
+    
+
+    <script type="module">
+      import { Log } from "./component/Log/script.js";
+      import { formulaire } from "./component/formulaire/script.js";
+      import { AddNewProfilForm } from "./component/NewProfileForm/script.js";
+      import { DataMovie } from "./data/dataMovie.js"
+      import { ProfileForm } from "./component/ProfileForm/script.js";
+      import { DataProfile } from "./data/dataProfile.js";
+      
+
+      window.C = {};
+
+      C.handlerAddUserProfile = async function () {
+    let form = document.querySelector(".profile__form");
+    let fd = new FormData(form); 
+    let res = await DataProfile.addUserProfile(fd);
+    V.renderLog(res);
+};
+
+      C.handlerAddUserProfile = async function () {
+        let form = document.querySelector(".profile");
+        let fd = new FormData(form); 
+        let res = await DataProfile.addUserProfile(fd);
+        V.renderLog(res);
+      };
+
+      C.handleraddNewProfile = async function () {
+        let form = document.querySelector(".addNewProfile__form");
+        let fd = new FormData(form);
+        let res = await DataProfile.addNewProfile(fd);
+        V.renderLog(res); 
+      };
+
+
+      C.start = function () {
+        V.renderLog("Démarrage de l'application");
+        V.renderMovie("C.handlerUpdate()");
+        V.renderAddUserProfile ("C.handlerAddUserProfile()");
+        V.renderaddNewProfile ("C.handleraddNewProfile()");
+      };
+
+      window.V = {};
+
+      V.renderLog = function (txt) {
+        let content = document.querySelector("#log");
+        content.innerHTML = Log.format(txt);
+      };
+
+      V.renderMovie = function (handler) {
+        let content = document.querySelector("#content");
+        content.innerHTML += formulaire.format(handler);
+      };
+
+      V.renderAddUserProfile = function (handler) {
+        let content = document.querySelector("#content");
+        content.innerHTML += ProfileForm.format(handler);
+      };
+
+      V.renderaddNewProfile = function (handler) {
+        let content = document.querySelector("#content");
+        content.innerHTML += AddNewProfilForm.format(handler);
+      };
+      
+      C.start();
+    </script>
+  </body>
+</html>

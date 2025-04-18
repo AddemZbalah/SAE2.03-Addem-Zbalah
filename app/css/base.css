@@ -12,6 +12,10 @@
 
 .movie-category{
     width: 100%;
-    background-color: black;
     color: white;
+    background-color: black;
+}
+
+body{
+    margin: 0;
 }

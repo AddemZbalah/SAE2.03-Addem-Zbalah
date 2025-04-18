@@ -3,30 +3,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 :root {
-  /* Couleurs principales */
+
   --color-primary: #0c1c36;
   --color-white: #ffffff;
   --color-gray: #f1f1f1;
   --color-bg: #ec008c;
   --color-dark: #18181A;
 
-  /* Palette de bleus */
+
   --color-blue-light: #0070FF;
   --color-blue-medium: #007AFF;
   --color-blue-default: #007BFF;
   --color-blue-dark: #001A60;
   --color-blue-navy: #003778;
   
-  /* Fonts */
+
   --font-primary: 'Roboto', sans-serif;
   --ff-sans: 'DM sans', sans-serif;
   --ff-Bebas: 'Bebas Neue', sans-serif;
   --font-weight-regular: 400;
   --font-weight-bold: 700;
   
-  /* Transitions */
+
   --transition-speed: 0.3s;
 }
 
-/* Import Google Fonts */
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');

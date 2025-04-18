@@ -1,5 +1,5 @@
 
-.hero_1 {
+.hero {
   height: 100vh;
   max-width: 100%;
   max-height: 100%;
@@ -12,7 +12,7 @@
 }
   
   
-.hero_1__title {
+.hero__title {
   max-width: 100%;
   margin-top: 3rem;
   font-family: var(--ff-sans);
@@ -23,7 +23,7 @@
 }
 
   
-.hero_1__dsp {
+.hero__dsp {
   width: 100%;
   font-size: 1rem;
   font-family: var(--ff-sans);
@@ -34,7 +34,7 @@
   
   
 
-.hero_1__navcontent{
+.hero__navcontent{
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -48,14 +48,14 @@
   
   
   
-.hero_1__nav{
+.hero__nav{
   width: 40rem;
   padding: 1rem;  
 }
   
   
   
-.hero_1__navlst{
+.hero__navlst{
   position: relative;
   display:flex;
   flex-direction: row;
@@ -95,7 +95,7 @@
 }
 
 
-.hero_1__uniimg{
+.hero__uniimg{
   width: 9rem;
   position: relative;
   transform: translateX(-9rem);
@@ -108,7 +108,7 @@
   justify-content: center;
   align-items: start;
   height: 100%;
-  width: 100%;
+  /* width: 100%; */
   margin-left: 5rem;
 }
 

@@ -77,10 +77,6 @@
 }
 
 .navbar__item:hover {
-    color: var(--color-white);
-}
-
-.navbar__item:hover {
     color: var(--color-gray);
 }
 
@@ -164,10 +160,6 @@
         transition: left 0.3s ease-in-out;
     }
 
-    .navbar__item:hover::after {
-        transform: scaleX(0);
-    }
-
     .navbar__toggle:checked ~ .navbar__list {
         left: 0;
     }
@@ -193,8 +185,6 @@
         width: 100%;
         margin: 0;
     }
-
-    
 
     .navbar__profile-container {
         flex-direction: column;

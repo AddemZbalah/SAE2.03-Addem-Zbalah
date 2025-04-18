@@ -8,14 +8,19 @@ let MovieCategory = {};
 
 MovieCategory.format = function(category, movies) {
     let html = template;
+    
+    if (!movies || movies.length === 0) {
+        if (category == "Films Populaires") {
+            return '<div class="movie-category"><h2>Films Populaires</h2><p>Aucun film populaire disponible</p></div>';
+        }
+        return ""; 
+    }
+
     html = html.replace("{{title}}", category);
 
     let html2 = Card.formatMany(movies);
     html = html.replace("{{movies}}", html2);
 
-    if (!movies || movies.length === 0) {
-        return ""; // Ne retourne rien si pas de films
-    }
 
     return html
 };
@@ -31,12 +36,6 @@ MovieCategory.formatMany = async function(categories,min_age){
             html += MovieCategory.format(elt.name, movies);
         }
     }
-
-    // if (html === "") {
-    //     html = `<div class="movie-category__empty">
-    //               <p>Aucun film disponible pour votre tranche d'âge.</p>
-    //             </div>`;
-    // }
 
     return html;
 };

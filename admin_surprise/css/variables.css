@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,500;9..40,700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+:root {
+  /* Primitive Tokens */
+  --color-black: hsl(253, 69%, 8%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-gray-light: hsl(0, 0%, 80%);
+  --color-gray: hsl(0, 0%, 50%);
+  --color-gray-dark: hsl(0, 0%, 20%);
+  --color-green: hsl(120, 100%, 37%);
+
+  --ff-sans: "DM sans", sans-serif;
+  --ff-Bebas: "Bebas Neue", sans-serif;
+
+  /* Sementic Tokens */
+  --color-fg: var(--color-white);
+  --color-bg: var(--color-gray-dark);
+  --color-accent: var(--color-green);
+
+  --color-primary: #0c1c36;
+  --color-white: #ffffff;
+  --color-gray: #f1f1f1;
+  --color-bg: #ec008c;
+  --color-dark: #18181A;
+
+
+  --color-blue-light: #0070FF;
+  --color-blue-medium: #007AFF;
+  --color-blue-default: #007BFF;
+  --color-blue-dark: #001A60;
+  --color-blue-navy: #003778;
+  
+
+  --font-primary: 'Roboto', sans-serif;
+  --ff-sans: 'DM sans', sans-serif;
+  --ff-Bebas: 'Bebas Neue', sans-serif;
+  --font-weight-regular: 400;
+  --font-weight-bold: 700;
+  
+
+  --transition-speed: 0.3s;
+}

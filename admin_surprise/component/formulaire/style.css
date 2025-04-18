@@ -1,0 +1,52 @@
+.form {
+    width: 100%;
+    font-family: "metropolis", sans-serif;
+}
+
+.form__title {
+    margin-bottom: 2rem;
+    color: var(--color-blue-light);
+    font-size: 2rem;
+    font-weight: bold;
+    font-family: "metropolis", sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+}
+
+.form__container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form select.form__input {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.5rem;
+}
+
+.form__btn{
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--color-blue-dark);
+    color: var(--color-white);
+    font-family: "metropolis", sans-serif;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.form__btn:hover{
+    background: var(--color-blue-light);
+    color: var(--color-white);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+}
+
